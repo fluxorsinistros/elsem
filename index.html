@@ -130,7 +130,7 @@ a{color:inherit}
 .hero-visual{position:relative;perspective:1900px;min-width:0}
 .float{animation:float 7s ease-in-out infinite}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-.hero .device{width:790px;max-width:none;transform:rotateY(-17deg) rotateX(5deg) rotateZ(-1.5deg);transform-origin:left center;margin-right:-180px}
+.hero .device{width:790px;max-width:none;transform:rotateY(18deg) rotateX(4deg) rotateZ(-3deg);transform-origin:left center;margin-right:-180px}
 .chip-float{position:absolute;z-index:3;display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:16px;background:rgba(15,24,48,.62);border:1px solid var(--glass-border);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 18px 40px -14px rgba(0,0,0,.6);font-size:12.5px;color:#E2E8F0;line-height:1.3;white-space:nowrap}
 .chip-float b{display:block;color:#fff;font-weight:600}
 .chip-float .dot{width:30px;height:30px;border-radius:10px;display:grid;place-items:center;flex:none}
@@ -419,6 +419,8 @@ a{color:inherit}
 .benefits{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
 .benefit{padding:26px;border-radius:var(--r-md);background:#fff;border:1px solid var(--line);display:grid;gap:10px;align-content:start;transition:transform .3s ease, box-shadow .3s ease}
 .benefit:hover{transform:translateY(-4px);box-shadow:var(--shadow-soft)}
+.trust{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:40px}
+@media (max-width:640px){.trust{grid-template-columns:minmax(0,1fr)}}
 .benefit .b-ico{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:var(--grad-btn);color:#fff;margin-bottom:6px}
 .benefit:nth-child(even) .b-ico{background:linear-gradient(135deg,#22D3EE,#2563EB)}
 .benefit h3{font-size:1rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
@@ -1093,6 +1095,17 @@ a{color:inherit}
       <article class="benefit reveal"><div class="b-ico"><svg class="ico"><use href="#i-funnel"/></svg></div><h3>Menos gargalos</h3><p>Identificação de atrasos e pendências.</p></article>
       <article class="benefit reveal"><div class="b-ico"><svg class="ico"><use href="#i-zap"/></svg></div><h3>Mais produtividade</h3><p>Automação de tarefas e rotinas.</p></article>
       <article class="benefit reveal"><div class="b-ico"><svg class="ico"><use href="#i-audit"/></svg></div><h3>Mais governança</h3><p>Rastreabilidade e auditoria.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= Dados e segurança ================= -->
+<section class="sec" id="seguranca" aria-labelledby="seg-t" style="padding-top:24px" data-component="Security">
+  <div class="wrap">
+    <div class="pricing-head reveal"><span class="eyebrow">Dados e segurança</span><h2 class="h-sec" id="seg-t" style="max-width:22ch">Seus dados protegidos na base.<span class="grad-text"> Acesso só para quem deve ver.</span></h2></div>
+    <div class="trust">
+      <article class="benefit reveal"><div class="b-ico"><svg class="ico"><use href="#i-lock"/></svg></div><h3>Row Level Security</h3><p>Cada usuário acessa apenas os registros que tem permissão de ver, com a regra aplicada no próprio banco de dados.</p></article>
+      <article class="benefit reveal"><div class="b-ico"><svg class="ico"><use href="#i-db"/></svg></div><h3>Base Supabase</h3><p>Dados armazenados em Postgres gerenciado pela Supabase.</p></article>
     </div>
   </div>
 </section>
