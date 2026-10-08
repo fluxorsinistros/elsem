@@ -1,0 +1,1377 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ELSEM — Tecnologia para logística, gestão de riscos e operações</title>
+<meta name="description" content="A ELSEM desenvolve produtos SaaS e soluções tecnológicas para tornar operações logísticas mais seguras, eficientes e inteligentes.">
+<!-- TODO: trocar pelo domínio oficial -->
+<link rel="canonical" href="https://www.elsen.com.br/">
+<meta name="theme-color" content="#0B1220">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/elsem-logo-512.png">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="ELSEM">
+<meta property="og:title" content="ELSEM — Tecnologia para logística, gestão de riscos e operações">
+<meta property="og:description" content="A ELSEM desenvolve produtos SaaS e soluções tecnológicas para tornar operações logísticas mais seguras, eficientes e inteligentes.">
+<meta property="og:url" content="https://www.elsen.com.br/">
+<meta property="og:image" content="https://www.elsen.com.br/assets/elsem-logo-512.png">
+<meta name="twitter:card" content="summary">
+</head>
+<body>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@500;600;700;800&display=swap">
+<style>
+/* Layout: páginas claras com dois grandes "cartões" escuros (hero e Fluxor) inset na tela, como na referência;
+   vidro só sobre fundo escuro e em elementos que precisam de hierarquia. */
+:root{
+  color-scheme: light;
+  --navy:#0B1220; --navy-2:#0F1830; --navy-3:#16213D;
+  --blue:#2563EB; --cyan:#22D3EE; --violet:#7C3AED;
+  --white:#FFFFFF; --bg:#F8FAFC; --line:#E2E8F0;
+  --ink:#0B1220; --ink-2:#334155; --muted:#5B6B82; --muted-dark:#A5B4CC;
+  --rose:#F43F5E;
+  --grad: linear-gradient(90deg,#22D3EE 0%,#2563EB 52%,#7C3AED 100%);
+  --grad-btn: linear-gradient(90deg,#2563EB 0%,#7C3AED 100%);
+  --glass-bg: rgba(255,255,255,.06); --glass-border: rgba(255,255,255,.12);
+  --glass-light: rgba(255,255,255,.62); --glass-light-border: rgba(255,255,255,.9);
+  --r-xl:32px; --r-lg:26px; --r-md:20px; --r-sm:14px;
+  --shadow-soft: 0 1px 2px rgba(11,18,32,.04), 0 12px 32px -12px rgba(11,18,32,.12);
+  --shadow-deep: 0 30px 80px -24px rgba(11,18,32,.55);
+  --font-display:'Sora', 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-body:'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --wrap: 1200px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:96px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img,svg{max-width:100%}
+h1,h2,h3,h4{font-family:var(--font-display);margin:0;letter-spacing:-.025em;line-height:1.08;text-wrap:balance}
+p{margin:0}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--cyan);outline-offset:3px;border-radius:8px}
+[hidden]{display:none!important}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.wrap{max-width:var(--wrap);margin-inline:auto;padding-inline:24px}
+.sprite{position:absolute;width:0;height:0;overflow:hidden}
+.ico{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+/* ---------- Tipografia utilitária ---------- */
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.eyebrow::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--grad);box-shadow:0 0 0 4px rgba(37,99,235,.12)}
+.eyebrow.pill{padding:7px 14px 7px 12px;border-radius:999px;background:var(--glass-bg);border:1px solid var(--glass-border);color:#DCE4F2;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.grad-text{background:var(--grad);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent}
+.h-sec{font-size:clamp(2rem,3.6vw,3rem);font-weight:700}
+.lead{font-size:1.0625rem;color:var(--ink-2);max-width:56ch}
+.on-dark .lead,.on-dark p{color:var(--muted-dark)}
+.on-dark h2,.on-dark h3{color:var(--white)}
+
+/* ---------- Botões ---------- */
+.btn{--h:52px;display:inline-flex;align-items:center;justify-content:center;gap:10px;height:var(--h);padding:0 24px;border-radius:999px;font:600 15px/1 var(--font-body);text-decoration:none;border:1px solid transparent;cursor:pointer;transition:transform .2s ease, box-shadow .25s ease, background-position .5s ease, background-color .2s ease, border-color .2s ease;white-space:nowrap}
+.btn .ico{width:18px;height:18px;transition:transform .2s ease}
+.btn:hover .ico{transform:translateX(3px)}
+.btn-grad{background:var(--grad-btn);background-size:160% 100%;color:#fff;box-shadow:0 10px 30px -10px rgba(124,58,237,.65), inset 0 1px 0 rgba(255,255,255,.22)}
+.btn-grad:hover{background-position:100% 0;transform:translateY(-1px);box-shadow:0 16px 36px -12px rgba(124,58,237,.75), inset 0 1px 0 rgba(255,255,255,.22)}
+.btn-ghost{background:rgba(255,255,255,.04);color:#fff;border-color:rgba(255,255,255,.28)}
+.btn-ghost:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.5)}
+.btn-soft{background:#EEF2FF;color:var(--blue);border-color:#E0E7FF}
+.btn-soft:hover{background:#E0E7FF}
+.btn-sm{--h:42px;padding:0 18px;font-size:14px}
+.btn[disabled],.btn[aria-disabled="true"]{background:#EEF1F6;color:#7A879B;border-color:var(--line);box-shadow:none;cursor:not-allowed;transform:none}
+
+/* ---------- Header (Navbar) ---------- */
+.nav{position:fixed;left:0;right:0;top:calc(env(safe-area-inset-top,0px) + 22px);z-index:50;padding-inline:28px;transition:top .3s ease}
+.nav-inner{max-width:1180px;margin-inline:auto;display:flex;align-items:center;gap:24px;padding:10px 10px 10px 22px;border-radius:999px;background:var(--glass-bg);border:1px solid var(--glass-border);backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%);box-shadow:0 10px 40px -18px rgba(0,0,0,.5);transition:padding .3s ease, background-color .3s ease, box-shadow .3s ease}
+.nav.scrolled{top:calc(env(safe-area-inset-top,0px) + 12px)}
+.nav.scrolled .nav-inner{padding:6px 6px 6px 18px;background:rgba(11,18,32,.74);box-shadow:0 16px 40px -16px rgba(11,18,32,.55)}
+.brand{display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:#fff;flex:none}
+.brand img{width:40px;height:auto;display:block}
+.brand img.brand-full{width:auto;height:44px}
+.nav-links{display:flex;gap:6px;list-style:none;margin:0 auto;padding:0}
+.nav-links a{display:block;padding:10px 14px;border-radius:999px;color:#C9D3E6;text-decoration:none;font-size:14.5px;font-weight:500;transition:color .2s, background-color .2s;position:relative}
+.nav-links a:hover{color:#fff;background:rgba(255,255,255,.06)}
+.nav-links a.active{color:#fff}
+.nav-links a.active::after{content:"";position:absolute;left:14px;right:14px;bottom:4px;height:2px;border-radius:2px;background:var(--grad)}
+.nav-toggle{display:none;margin-left:auto;width:44px;height:44px;border-radius:50%;border:1px solid var(--glass-border);background:rgba(255,255,255,.06);color:#fff;cursor:pointer;align-items:center;justify-content:center}
+.mobile-menu{max-width:1180px;margin:10px auto 0;padding:14px;border-radius:24px;background:rgba(11,18,32,.88);border:1px solid var(--glass-border);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:var(--shadow-deep)}
+.mobile-menu ul{list-style:none;margin:0 0 12px;padding:0;display:grid;gap:2px}
+.mobile-menu a:not(.btn){display:block;padding:13px 14px;border-radius:14px;color:#E2E8F0;text-decoration:none;font-weight:500}
+.mobile-menu a:not(.btn):hover{background:rgba(255,255,255,.06)}
+.mobile-menu .btn{width:100%}
+
+/* ---------- Superfícies escuras (hero, Fluxor, CTA, footer) ---------- */
+.dark-card{position:relative;margin:12px;border-radius:var(--r-xl);background:var(--navy);color:#fff;overflow:hidden;isolation:isolate}
+.dark-card .bg{position:absolute;inset:0;z-index:-1;pointer-events:none}
+.bg-glow{background:
+  radial-gradient(60% 70% at 85% 10%, rgba(37,99,235,.45), transparent 60%),
+  radial-gradient(45% 55% at 100% 85%, rgba(124,58,237,.45), transparent 60%),
+  radial-gradient(40% 50% at 5% 100%, rgba(34,211,238,.16), transparent 60%),
+  radial-gradient(30% 40% at 30% 0%, rgba(124,58,237,.18), transparent 70%)}
+.bg-grid{background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:56px 56px;-webkit-mask-image:radial-gradient(70% 80% at 70% 30%,#000 10%,transparent 75%);mask-image:radial-gradient(70% 80% at 70% 30%,#000 10%,transparent 75%)}
+.bg-dots{background-image:radial-gradient(rgba(255,255,255,.35) 1px,transparent 1.4px);background-size:22px 22px;-webkit-mask-image:radial-gradient(35% 45% at 12% 18%,#000,transparent 70%);mask-image:radial-gradient(35% 45% at 12% 18%,#000,transparent 70%);opacity:.35}
+.flow-lines{position:absolute;inset:auto 0 0 0;height:60%;z-index:-1;opacity:.55;pointer-events:none}
+.flow-lines path{fill:none;stroke-width:1.2;stroke-dasharray:4 10;animation:dash 18s linear infinite}
+@keyframes dash{to{stroke-dashoffset:-560}}
+
+/* ---------- Hero ---------- */
+.hero-card{padding:150px 0 72px;min-height:min(780px,100svh)}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.12fr);gap:40px;align-items:center}
+.hero-copy{position:relative;z-index:2;max-width:600px}
+.hero h1{font-size:clamp(2.5rem,4.2vw,3.75rem);font-weight:700;margin:22px 0 22px;letter-spacing:-.035em;line-height:1.04;color:#fff}
+.hero h1 .grad-text{animation:shimmer 8s ease-in-out infinite alternate}
+@keyframes shimmer{from{background-position:0 0}to{background-position:100% 0}}
+.hero-sub{font-size:1.0625rem;color:#C2CDE0;max-width:48ch}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px}
+.hero-ind{display:flex;flex-wrap:wrap;gap:14px 28px;margin:44px 0 0;padding:0;list-style:none}
+.hero-ind li{display:flex;align-items:center;gap:12px;font-size:13.5px;line-height:1.35;color:#C2CDE0;max-width:190px}
+.ind-ico{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;background:var(--glass-bg);border:1px solid var(--glass-border);color:var(--cyan);flex:none}
+.hero-visual{position:relative;perspective:1900px;min-width:0}
+.float{animation:float 7s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.hero .device{width:790px;max-width:none;transform:rotateY(-17deg) rotateX(5deg) rotateZ(-1.5deg);transform-origin:left center;margin-right:-180px}
+.chip-float{position:absolute;z-index:3;display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:16px;background:rgba(15,24,48,.62);border:1px solid var(--glass-border);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 18px 40px -14px rgba(0,0,0,.6);font-size:12.5px;color:#E2E8F0;line-height:1.3;white-space:nowrap}
+.chip-float b{display:block;color:#fff;font-weight:600}
+.chip-float .dot{width:30px;height:30px;border-radius:10px;display:grid;place-items:center;flex:none}
+.hero .chip-a{left:-34px;bottom:58px;animation:float 6s ease-in-out -2s infinite}
+.hero .chip-b{left:34%;top:-26px;animation:float 8s ease-in-out -4s infinite}
+
+/* ---------- Mockup de app (ProductMockup) ---------- */
+.device{position:relative;padding:12px;border-radius:26px;background:linear-gradient(160deg,#1C2850,#0B1220 55%);border:1px solid rgba(255,255,255,.14);box-shadow:var(--shadow-deep),0 0 0 1px rgba(34,211,238,.06),0 0 60px -10px rgba(37,99,235,.45)}
+.device::before{content:"";position:absolute;inset:-1px;border-radius:inherit;padding:1px;background:linear-gradient(130deg,rgba(34,211,238,.6),rgba(37,99,235,.1) 40%,rgba(124,58,237,.6));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+.app{display:grid;grid-template-columns:170px minmax(0,1fr);border-radius:16px;overflow:hidden;background:#F4F7FB;color:var(--ink);font-size:12px;line-height:1.4;min-height:430px}
+.app-side{background:var(--navy);color:#B7C3D9;padding:16px 12px;display:flex;flex-direction:column;gap:4px}
+.app-brand{display:flex;align-items:center;gap:8px;padding:2px 6px 14px;color:#fff;font:700 15px/1 var(--font-display)}
+.app-brand small{display:block;font:500 9.5px/1.2 var(--font-body);color:#7F8DA8;letter-spacing:.02em;margin-top:3px}
+.fx-mark{width:28px;height:28px;flex:none}
+.app-nav{display:flex;align-items:center;gap:9px;padding:8px 9px;border-radius:9px;font-size:11.5px;font-weight:500}
+.app-nav .ico{width:15px;height:15px}
+.app-nav.on{background:linear-gradient(90deg,rgba(37,99,235,.9),rgba(124,58,237,.75));color:#fff;box-shadow:0 6px 16px -8px rgba(124,58,237,.9)}
+.app-nav .cnt{margin-left:auto;font-size:10px;padding:1px 7px;border-radius:99px;background:rgba(244,63,94,.18);color:#FDA4AF;font-weight:600}
+.app-main{padding:16px 18px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.app-top{display:flex;align-items:center;gap:10px}
+.app-search{flex:1;display:flex;align-items:center;gap:8px;height:32px;padding:0 12px;border-radius:10px;background:#fff;border:1px solid var(--line);color:#94A3B8;font-size:11px;min-width:0;white-space:nowrap;overflow:hidden}
+.app-search .ico{width:14px;height:14px}
+.app-icon{width:32px;height:32px;border-radius:10px;background:#fff;border:1px solid var(--line);display:grid;place-items:center;color:#475569;position:relative;flex:none}
+.app-icon .ico{width:15px;height:15px}
+.app-icon.notif::after{content:"";position:absolute;top:7px;right:8px;width:6px;height:6px;border-radius:50%;background:var(--rose);border:1.5px solid #fff}
+.avatar{width:32px;height:32px;border-radius:50%;background:var(--grad-btn);color:#fff;display:grid;place-items:center;font-weight:700;font-size:10.5px;flex:none}
+.app-head{display:flex;align-items:flex-end;justify-content:space-between;gap:10px}
+.app-head h4{font:700 15px/1.2 var(--font-display);letter-spacing:-.01em}
+.app-head span{color:#64748B;font-size:11px}
+.demo-tag{font-size:9.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#6D28D9;background:#F1EAFE;border:1px solid #E4D7FD;border-radius:99px;padding:3px 8px;white-space:nowrap}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.kpi{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.kpi span{display:block;color:#64748B;font-size:10.5px}
+.kpi b{display:block;font:700 22px/1.15 var(--font-display);color:var(--blue);margin-top:2px;font-variant-numeric:tabular-nums}
+.kpi small{font-size:10px;color:#64748B}
+.kpi.warn b{color:var(--rose)}
+.kpi.done b{color:var(--violet)}
+.kpi.run b{color:#0891B2}
+.app-grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:10px}
+.panel{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px;min-width:0}
+.panel-h{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}
+.panel-h b{font-size:11.5px;font-weight:600}
+.panel-h span{font-size:10px;color:#64748B}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+.chart text{font-size:9px;fill:#94A3B8;font-family:var(--font-body)}
+.draw{stroke-dasharray:420;stroke-dashoffset:420;animation:draw 2.2s .4s cubic-bezier(.4,0,.2,1) forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.types{display:grid;gap:7px;margin-top:4px}
+.type-row{display:grid;grid-template-columns:62px minmax(0,1fr) 22px;align-items:center;gap:8px;font-size:10.5px;color:#475569}
+.type-row b{text-align:right;font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums}
+.bar{height:7px;border-radius:9px;background:#EEF2F7;overflow:hidden}
+.bar i{display:block;height:100%;border-radius:inherit;background:var(--grad);transform-origin:left;animation:grow 1.6s .5s cubic-bezier(.2,.8,.2,1) both}
+@keyframes grow{from{transform:scaleX(0)}}
+.list{display:grid;gap:6px}
+.li{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:8px;padding:6px 8px;border-radius:9px;background:#F8FAFC;font-size:10.5px}
+.li .sev{width:7px;height:7px;border-radius:50%}
+.li b{font-weight:600}
+.li em{font-style:normal;color:#64748B}
+.sla{font-size:9.5px;font-weight:600;padding:2px 7px;border-radius:99px;white-space:nowrap}
+.sla.ok{background:#E0F7FB;color:#0E7490}
+.sla.mid{background:#EDE7FE;color:#6D28D9}
+.sla.late{background:#FFE4E8;color:#BE123C}
+.alert{display:flex;gap:9px;align-items:flex-start;padding:9px 10px;border-radius:10px;background:linear-gradient(90deg,#FFF1F3,#F5F0FF);border:1px solid #FBD5DD;font-size:10.5px;color:#475569;margin-top:8px}
+.alert .ico{width:15px;height:15px;color:var(--rose);margin-top:1px}
+.alert b{color:var(--ink)}
+
+/* ---------- Ecossistema ---------- */
+.eco{padding:56px 0 24px}
+.eco-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px 40px;margin-bottom:28px}
+.eco-head h2{font-size:clamp(1.5rem,2.3vw,1.9rem);font-weight:700;margin-top:10px}
+.eco-head p{color:var(--muted);max-width:52ch}
+.eco-list{list-style:none;margin:0;padding:22px 0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.eco-list li{display:flex;align-items:center;justify-content:center;gap:12px;font:600 14.5px/1.2 var(--font-display);letter-spacing:-.005em;color:#3B4A63;padding:10px 6px;border-radius:14px;transition:background-color .25s,color .25s}
+.eco-list li:hover{background:#fff;color:var(--ink);box-shadow:var(--shadow-soft)}
+.eco-list .ico{width:24px;height:24px;color:var(--blue)}
+
+/* ---------- Seções claras ---------- */
+.sec{padding:96px 0;position:relative}
+.sec-tight{padding:72px 0}
+.sec-head{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:24px 56px;align-items:end;margin-bottom:48px}
+.sec-head h2{margin-top:14px}
+.sec-head .side{display:grid;gap:20px;justify-items:start}
+.sec-head .side p{color:var(--ink-2)}
+.blobs{position:absolute;inset:0;overflow:hidden;z-index:-1;pointer-events:none}
+.blobs::before,.blobs::after{content:"";position:absolute;width:520px;height:520px;border-radius:50%;filter:blur(90px);opacity:.38}
+.blobs::before{left:-260px;top:10%;background:radial-gradient(circle,#A78BFA,transparent 65%)}
+.blobs::after{right:-260px;bottom:0;background:radial-gradient(circle,#7DD3FC,transparent 65%)}
+.light-glass{background:var(--glass-light);border:1px solid var(--glass-light-border);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:var(--shadow-soft)}
+
+/* Sobre */
+.about{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:48px;align-items:center}
+.about h2 span{display:block}
+.about .lead{margin-top:20px}
+.pillars{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.pillar{padding:26px;border-radius:var(--r-md);transition:transform .3s ease, box-shadow .3s ease}
+.pillar:hover{transform:translateY(-4px);box-shadow:0 24px 50px -24px rgba(37,99,235,.35)}
+.pillar .badge-ico{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;background:var(--grad-btn);color:#fff;margin-bottom:18px;box-shadow:0 10px 24px -10px rgba(124,58,237,.7)}
+.pillar:nth-child(odd) .badge-ico{background:linear-gradient(135deg,#22D3EE,#2563EB)}
+.pillar h3{font-size:1.125rem;font-weight:700;letter-spacing:-.01em}
+.pillar p{color:var(--ink-2);font-size:.95rem;margin-top:6px}
+
+/* Produtos */
+.products{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.product{display:flex;flex-direction:column;gap:20px;padding:28px;border-radius:var(--r-lg);background:rgba(255,255,255,.78);border:1px solid #fff;box-shadow:var(--shadow-soft);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);transition:transform .3s ease, box-shadow .3s ease}
+.product:hover{transform:translateY(-4px);box-shadow:0 30px 60px -28px rgba(37,99,235,.35)}
+.product-top{display:flex;align-items:center;gap:16px}
+.product-logo{width:60px;height:60px;border-radius:18px;display:grid;place-items:center;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-soft);flex:none}
+.product-logo .fx-mark{width:40px;height:40px}
+.product h3{font-size:1.45rem;font-weight:700}
+.product .cat{color:var(--muted);font-size:.9rem;margin-top:3px;line-height:1.35}
+.product .desc{color:var(--ink-2)}
+.by{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.tags{display:flex;flex-wrap:wrap;gap:8px;list-style:none;margin:0;padding:0}
+.tags li{display:inline-flex;align-items:center;gap:6px;padding:6px 11px;border-radius:99px;background:#F1F5FF;border:1px solid #E0E7FF;color:#1E3A8A;font-size:13px;font-weight:500}
+.tags li::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--grad)}
+.product .btn{margin-top:auto;width:100%}
+.product.future{background:rgba(255,255,255,.5)}
+.product.future .product-logo{border-style:dashed;color:#94A3B8;background:transparent;box-shadow:none}
+.skel{display:grid;gap:12px}
+.skel i{display:block;height:10px;border-radius:9px;background:linear-gradient(90deg,#E8EDF5,#F3F6FA,#E8EDF5);background-size:200% 100%;animation:skel 2.4s ease-in-out infinite}
+.skel i:nth-child(2){width:82%}.skel i:nth-child(3){width:64%}.skel i:nth-child(4){width:74%}
+@keyframes skel{to{background-position:-200% 0}}
+.status{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:600;color:var(--muted);padding:5px 11px;border-radius:99px;background:#F1F5F9;border:1px solid var(--line);width:max-content}
+.status::before{content:"";width:7px;height:7px;border-radius:50%;background:#94A3B8}
+.status.live{color:#0E7490;background:#E6FBFF;border-color:#BAF2FB}
+.status.live::before{background:var(--cyan);box-shadow:0 0 0 3px rgba(34,211,238,.25)}
+
+/* ---------- Fluxor ---------- */
+.fluxor-card{padding:104px 0 96px}
+.fluxor-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px 56px;align-items:end}
+.fx-id{display:inline-flex;align-items:center;gap:12px;padding:8px 16px 8px 8px;border-radius:999px;background:var(--glass-bg);border:1px solid var(--glass-border);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.fx-id .fx-mark{width:34px;height:34px}
+.fx-id b{font:700 18px/1 var(--font-display);letter-spacing:-.01em}
+.fx-id small{display:block;font-size:11px;color:var(--muted-dark);margin-top:3px}
+.fluxor-head h2{font-size:clamp(2.2rem,4.2vw,3.5rem);font-weight:700;margin-top:22px}
+.fluxor-head h2 span{display:block}
+.fluxor-head .side{display:grid;gap:22px;justify-items:start}
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin:48px 0 22px;padding:6px;border-radius:999px;background:var(--glass-bg);border:1px solid var(--glass-border);width:max-content;max-width:100%}
+.tab{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 16px;border-radius:999px;border:0;background:transparent;color:#B9C5DA;font:500 14px/1 var(--font-body);cursor:pointer;transition:background-color .2s,color .2s}
+.tab .ico{width:16px;height:16px}
+.tab:hover{color:#fff}
+.tab[aria-selected="true"]{background:var(--grad-btn);color:#fff;box-shadow:0 8px 20px -10px rgba(124,58,237,.9)}
+.stage{position:relative}
+.stage .device{width:100%}
+.stage .app{grid-template-columns:190px minmax(0,1fr);min-height:520px;font-size:12.5px}
+.stage .chart svg{max-height:190px}
+.stage .chip-c{right:-18px;top:70px;animation:float 7s ease-in-out -1s infinite}
+.stage .chip-d{left:-22px;bottom:80px;animation:float 8s ease-in-out -3s infinite}
+.tabpanel{display:flex;flex-direction:column;gap:12px;min-width:0}
+.tabpanel[hidden]{display:none!important}
+.tbl-wrap{overflow-x:auto;background:#fff;border:1px solid var(--line);border-radius:12px}
+.tbl{width:100%;border-collapse:collapse;font-size:11.5px;min-width:640px}
+.tbl th{text-align:left;font-weight:600;color:#64748B;font-size:10.5px;letter-spacing:.04em;text-transform:uppercase;padding:10px 12px;border-bottom:1px solid var(--line);background:#FAFBFD}
+.tbl td{padding:10px 12px;border-bottom:1px solid #EEF2F7;white-space:nowrap}
+.tbl tr:last-child td{border-bottom:0}
+.tbl td b{font-weight:600}
+.stage-pill{display:inline-flex;align-items:center;gap:6px;font-size:10.5px;padding:3px 9px;border-radius:99px;background:#EEF2FF;color:#1E40AF;font-weight:500}
+.prog{display:inline-block;width:70px;height:6px;border-radius:9px;background:#EEF2F7;vertical-align:middle;overflow:hidden;margin-right:6px}
+.prog i{display:block;height:100%;background:var(--grad)}
+.filters{display:flex;flex-wrap:wrap;gap:6px}
+.filter{font-size:10.5px;padding:5px 10px;border-radius:99px;background:#fff;border:1px solid var(--line);color:#475569}
+.filter.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.detail-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.detail-head h4{font:700 14px/1.2 var(--font-display)}
+.detail-head p{font-size:11px;color:#64748B;margin-top:3px}
+.detail-head .meta{display:flex;gap:6px;flex-wrap:wrap}
+.detail-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr) minmax(0,1fr);gap:10px}
+.tl{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.tl li{position:relative;padding:0 0 12px 22px;font-size:11px;color:#475569}
+.tl li::before{content:"";position:absolute;left:4px;top:4px;width:9px;height:9px;border-radius:50%;background:#CBD5E1;box-shadow:0 0 0 3px #fff}
+.tl li::after{content:"";position:absolute;left:8px;top:14px;bottom:0;width:1.5px;background:#E2E8F0}
+.tl li:last-child::after{display:none}
+.tl li.done::before{background:var(--blue)}
+.tl li.now::before{background:var(--violet);box-shadow:0 0 0 3px #fff,0 0 0 6px rgba(124,58,237,.18)}
+.tl b{display:block;color:var(--ink);font-weight:600;font-size:11.5px}
+.docs,.tasks{list-style:none;margin:0;padding:0;display:grid;gap:7px}
+.docs li{display:flex;align-items:center;gap:9px;padding:7px 9px;border-radius:9px;background:#F8FAFC;font-size:11px}
+.docs .ico{width:16px;height:16px;color:var(--blue)}
+.docs em{margin-left:auto;font-style:normal;color:#94A3B8;font-size:10px}
+.tasks li{display:grid;grid-template-columns:16px minmax(0,1fr);gap:8px;font-size:11px;align-items:start;padding:6px 0;border-bottom:1px dashed #E2E8F0}
+.tasks li:last-child{border-bottom:0}
+.tasks .box{width:15px;height:15px;border-radius:5px;border:1.5px solid #CBD5E1;display:grid;place-items:center;margin-top:1px}
+.tasks li.ok .box{background:var(--blue);border-color:var(--blue);color:#fff}
+.tasks li.ok .box .ico{width:10px;height:10px;stroke-width:3}
+.tasks li.ok span{color:#94A3B8;text-decoration:line-through}
+.tasks small{display:block;color:#64748B;font-size:10px}
+.flow-canvas{position:relative;background:#fff;border:1px solid var(--line);border-radius:12px;padding:22px 18px;background-image:radial-gradient(#E2E8F0 1px,transparent 1.2px);background-size:16px 16px;overflow-x:auto}
+.flow-row{display:flex;align-items:center;gap:0;min-width:760px}
+.node{flex:none;width:128px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px;box-shadow:0 6px 16px -10px rgba(11,18,32,.25);font-size:10.5px;color:#64748B}
+.node b{display:block;color:var(--ink);font-size:11.5px;font-weight:600;margin-bottom:4px}
+.node .sla{display:inline-block;margin-top:6px}
+.node.start{border-color:#A5F3FC}
+.node.end{border-color:#DDD6FE}
+.node.decision{background:linear-gradient(135deg,#F5F3FF,#EFF6FF);border-color:#C7D2FE}
+.edge{flex:1;min-width:22px;height:2px;background:var(--grad);position:relative}
+.edge::after{content:"";position:absolute;right:-1px;top:-4px;border:5px solid transparent;border-left:7px solid var(--violet);border-right:0}
+.branch{display:grid;gap:12px}
+.rules{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.rule{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:11px;color:#475569}
+.rule b{color:var(--ink);font-weight:600}
+.rule .kw{font-weight:600;color:var(--violet)}
+
+/* ---------- Torre de Controle ---------- */
+.tower{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:56px;align-items:center}
+.tower h2 span{display:block}
+.tower .tag-exc{display:inline-flex;align-items:center;gap:8px;margin-top:22px;padding:8px 14px;border-radius:12px;background:#0B1220;color:#fff;font:600 12.5px/1 var(--font-body);letter-spacing:.08em;text-transform:uppercase}
+.tower .tag-exc i{width:8px;height:8px;border-radius:50%;background:var(--rose);box-shadow:0 0 0 4px rgba(244,63,94,.25);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 8px rgba(244,63,94,0)}}
+.tower .lead{margin-top:18px}
+.watch{list-style:none;margin:28px 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 18px}
+.watch li{display:flex;align-items:center;gap:10px;font-size:.95rem;color:var(--ink-2);font-weight:500}
+.watch .ico{width:18px;height:18px;color:var(--violet)}
+.ctl{position:relative;border-radius:var(--r-lg);padding:20px;background:linear-gradient(160deg,#16213D,#0B1220 60%);color:#E2E8F0;box-shadow:var(--shadow-deep);overflow:hidden;isolation:isolate}
+.ctl::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(60% 60% at 100% 0,rgba(124,58,237,.35),transparent 60%),radial-gradient(50% 50% at 0 100%,rgba(34,211,238,.18),transparent 60%)}
+.ctl-top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}
+.ctl-top h3{font:700 15px/1.2 var(--font-display);color:#fff;letter-spacing:-.01em}
+.ctl-top span{font-size:11.5px;color:var(--muted-dark)}
+.live{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:#A5F3FC;font-weight:600}
+.live::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--cyan);animation:pulse-c 2s infinite}
+@keyframes pulse-c{0%{box-shadow:0 0 0 0 rgba(34,211,238,.6)}70%{box-shadow:0 0 0 8px rgba(34,211,238,0)}}
+.ctl-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.ctl-kpi{padding:12px;border-radius:14px;background:var(--glass-bg);border:1px solid var(--glass-border);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.ctl-kpi span{display:block;font-size:11px;color:var(--muted-dark);line-height:1.3}
+.ctl-kpi b{display:block;font:700 26px/1.1 var(--font-display);color:#fff;margin-top:6px;font-variant-numeric:tabular-nums}
+.ctl-kpi.crit{border-color:rgba(244,63,94,.45);background:rgba(244,63,94,.1)}
+.ctl-kpi.crit b{color:#FDA4AF}
+.bottleneck{display:flex;align-items:center;gap:12px;margin:12px 0;padding:12px 14px;border-radius:14px;background:linear-gradient(90deg,rgba(124,58,237,.22),rgba(37,99,235,.12));border:1px solid rgba(167,139,250,.35);font-size:12.5px}
+.bottleneck .ico{color:#C4B5FD;width:20px;height:20px}
+.bottleneck b{color:#fff}
+.exc{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.exc li{display:grid;grid-template-columns:4px minmax(0,1fr) auto auto;align-items:center;gap:12px;padding:10px 12px 10px 0;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);font-size:12px;overflow:hidden}
+.exc .stripe{align-self:stretch;margin:-10px 0;background:var(--rose)}
+.exc li.mid .stripe{background:var(--violet)}
+.exc li.pend .stripe{background:var(--blue)}
+.exc b{color:#fff;font-weight:600}
+.exc em{display:block;font-style:normal;color:var(--muted-dark);font-size:11px}
+.exc .who{font-size:11px;color:#C7D2E4;white-space:nowrap}
+.exc .act{font-size:11px;font-weight:600;color:#fff;padding:6px 12px;border-radius:99px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);white-space:nowrap}
+.ctl .demo-tag{background:rgba(124,58,237,.18);border-color:rgba(167,139,250,.35);color:#DDD6FE}
+
+/* ---------- Como funciona ---------- */
+.steps{position:relative;list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:20px}
+.steps-line{position:absolute;left:10%;right:10%;top:35px;height:3px;border-radius:3px;background:var(--grad);overflow:hidden}
+.steps-line::after{content:"";position:absolute;top:0;bottom:0;width:120px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.95),transparent);animation:travel 3.6s ease-in-out infinite}
+@keyframes travel{from{left:-120px}to{left:100%}}
+.step{position:relative;text-align:center;display:grid;justify-items:center;gap:10px}
+.step-n{width:72px;height:72px;border-radius:50%;display:grid;place-items:center;background:#fff;border:1px solid var(--line);box-shadow:0 14px 30px -14px rgba(37,99,235,.45);font:700 18px/1 var(--font-display);position:relative}
+.step-n::before{content:"";position:absolute;inset:6px;border-radius:50%;background:var(--grad);opacity:.12}
+.step-n span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.step h3{font-size:1rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700;margin-top:8px}
+.step p{font-size:.92rem;color:var(--ink-2);max-width:24ch}
+
+/* ---------- Recursos ---------- */
+.features{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.feature{padding:24px;border-radius:var(--r-md);background:#fff;border:1px solid var(--line);transition:transform .3s ease, box-shadow .3s ease, border-color .3s ease}
+.feature:hover{transform:translateY(-4px);box-shadow:0 24px 50px -26px rgba(37,99,235,.4);border-color:#DCE3F0}
+.feature .f-ico{width:44px;height:44px;border-radius:13px;display:grid;place-items:center;background:linear-gradient(135deg,rgba(34,211,238,.14),rgba(124,58,237,.14));color:var(--blue);margin-bottom:16px}
+.feature h3{font-size:1.05rem;font-weight:700;letter-spacing:-.01em}
+.feature p{font-size:.92rem;color:var(--ink-2);margin-top:6px}
+
+/* ---------- Além do software ---------- */
+.beyond{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:40px;align-items:center;padding:48px;border-radius:var(--r-xl);background:rgba(255,255,255,.8);border:1px solid #fff;box-shadow:0 30px 70px -40px rgba(37,99,235,.35);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.beyond h2{font-size:clamp(2.2rem,4vw,3.25rem);font-weight:700}
+.underline{display:block;width:120px;height:6px;margin:16px 0 22px;border-radius:9px;background:var(--grad)}
+.beyond .btn{margin-top:28px}
+.offer{display:grid;gap:14px}
+.offer-card{display:grid;grid-template-columns:auto minmax(0,1fr);gap:18px;align-items:center;padding:22px 24px;border-radius:var(--r-md);background:#fff;border:1px solid var(--line);transition:transform .3s ease, box-shadow .3s ease}
+.offer-card:hover{transform:translateX(4px);box-shadow:var(--shadow-soft)}
+.offer-card .o-ico{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;background:#F1F5FF;color:var(--blue)}
+.offer-card h3{font-size:1.05rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+.offer-card p{color:var(--ink-2);font-size:.95rem;margin-top:2px}
+
+/* ---------- Da operação para a tecnologia ---------- */
+.journey-card{padding:80px 0}
+.journey{list-style:none;margin:44px 0 0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;counter-reset:j}
+.journey li{position:relative;padding:20px;border-radius:var(--r-md);background:var(--glass-bg);border:1px solid var(--glass-border);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.journey li:not(:last-child)::after{content:"";position:absolute;right:-12px;top:50%;width:10px;height:10px;border-top:2px solid var(--cyan);border-right:2px solid var(--cyan);transform:translateY(-50%) rotate(45deg);opacity:.85}
+.journey .ico{width:24px;height:24px;color:var(--cyan)}
+.journey h3{font-size:.95rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-top:14px}
+.journey p{font-size:.88rem;margin-top:6px}
+.journey li:last-child{background:linear-gradient(135deg,rgba(37,99,235,.35),rgba(124,58,237,.35));border-color:rgba(167,139,250,.45)}
+.quote{margin:56px auto 0;max-width:22ch;text-align:center;font:700 clamp(1.9rem,3.6vw,3rem)/1.1 var(--font-display);letter-spacing:-.03em;color:#fff}
+.quote .grad-text{display:inline}
+
+/* ---------- Benefícios ---------- */
+.benefits{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.benefit{padding:26px;border-radius:var(--r-md);background:#fff;border:1px solid var(--line);display:grid;gap:10px;align-content:start;transition:transform .3s ease, box-shadow .3s ease}
+.benefit:hover{transform:translateY(-4px);box-shadow:var(--shadow-soft)}
+.benefit .b-ico{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:var(--grad-btn);color:#fff;margin-bottom:6px}
+.benefit:nth-child(even) .b-ico{background:linear-gradient(135deg,#22D3EE,#2563EB)}
+.benefit h3{font-size:1rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.benefit p{color:var(--ink-2);font-size:.95rem}
+
+/* ---------- Planos (Pricing) ---------- */
+.pricing-head{text-align:center;margin-bottom:44px;display:grid;justify-items:center;gap:12px}
+.pricing-head p{color:var(--ink-2)}
+.plans{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;align-items:stretch}
+.plan{position:relative;display:flex;flex-direction:column;gap:20px;padding:30px;border-radius:var(--r-lg);background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-soft);transition:transform .3s ease, box-shadow .3s ease}
+.plan:hover{transform:translateY(-4px)}
+.plan h3{font-size:1.25rem;font-weight:700}
+.plan .p-desc{color:var(--muted);font-size:.92rem;margin-top:4px}
+.price{display:grid;gap:4px;padding-bottom:20px;border-bottom:1px solid var(--line)}
+.price .main{font:700 2.4rem/1 var(--font-display);letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.price .main small{font:500 1rem/1 var(--font-body);color:var(--muted);letter-spacing:0}
+.price .setup{font-size:.92rem;color:var(--ink-2)}
+.price .setup b{font-weight:600}
+.plan ul{list-style:none;margin:0;padding:0;display:grid;gap:11px}
+.plan li{display:grid;grid-template-columns:20px minmax(0,1fr);gap:10px;font-size:.95rem;color:var(--ink-2)}
+.plan li .ico{width:18px;height:18px;color:var(--blue);margin-top:3px;stroke-width:2.4}
+.plan .btn{margin-top:auto;width:100%}
+.plan.featured{background:var(--navy);color:#fff;border-color:transparent;box-shadow:0 40px 80px -30px rgba(37,99,235,.55);transform:translateY(-10px);overflow:hidden;isolation:isolate}
+.plan.featured::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(70% 50% at 100% 0,rgba(124,58,237,.45),transparent 60%),radial-gradient(60% 40% at 0 100%,rgba(37,99,235,.35),transparent 60%)}
+.plan.featured:hover{transform:translateY(-14px)}
+.plan.featured .p-desc,.plan.featured .price .main small{color:var(--muted-dark)}
+.plan.featured .price{border-color:rgba(255,255,255,.12)}
+.plan.featured .price .setup,.plan.featured li{color:#D5DEEC}
+.plan.featured li .ico{color:var(--cyan)}
+.badge{position:absolute;top:24px;right:24px;font-size:11.5px;font-weight:600;padding:6px 12px;border-radius:99px;background:var(--grad-btn);color:#fff;box-shadow:0 8px 20px -8px rgba(124,58,237,.9)}
+.pricing-note{text-align:center;color:var(--muted);font-size:.875rem;margin-top:28px}
+
+/* ---------- CTA + Formulário ---------- */
+.cta-card{padding:96px 0}
+.cta-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:start}
+.cta-grid h2{font-size:clamp(2.2rem,4.2vw,3.4rem);font-weight:700;color:#fff}
+.cta-grid h2 span{display:block}
+.cta-grid .lead{margin-top:22px;color:#C2CDE0}
+.cta-btns{display:flex;flex-wrap:wrap;gap:14px;margin-top:32px}
+.cta-points{list-style:none;margin:40px 0 0;padding:0;display:grid;gap:14px}
+.cta-points li{display:flex;align-items:center;gap:12px;color:#C2CDE0;font-size:.95rem}
+.form{padding:30px;border-radius:var(--r-lg);background:rgba(255,255,255,.07);border:1px solid var(--glass-border);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 30px 70px -30px rgba(0,0,0,.6);color-scheme:dark}
+.form h3{font-size:1.3rem;font-weight:700;color:#fff}
+.form > p{color:var(--muted-dark);font-size:.92rem;margin-top:6px}
+.fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:22px}
+.field{display:grid;gap:7px;min-width:0}
+.field.full{grid-column:1/-1}
+.field label{font-size:13px;font-weight:500;color:#D5DEEC}
+.field label span{color:var(--muted-dark);font-weight:400}
+.field input,.field select,.field textarea{width:100%;height:48px;padding:0 14px;border-radius:14px;border:1px solid rgba(255,255,255,.16);background:rgba(11,18,32,.45);color:#fff;font:400 15px/1.3 var(--font-body);transition:border-color .2s, box-shadow .2s, background-color .2s}
+.field textarea{height:110px;padding:12px 14px;resize:vertical}
+.field select{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%23A5B4CC' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m4 6 4 4 4-4'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:40px}
+.field select option{background:#0F1830;color:#fff}
+.field input::placeholder,.field textarea::placeholder{color:#7F8DA8}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--cyan);box-shadow:0 0 0 4px rgba(34,211,238,.18);background:rgba(11,18,32,.65)}
+.field .err{font-size:12px;color:#FDA4AF;min-height:0}
+.field.invalid input,.field.invalid select{border-color:var(--rose)}
+.form .btn{width:100%;margin-top:20px}
+.form-foot{font-size:12px;color:var(--muted-dark);margin-top:12px;text-align:center}
+.form-ok{display:grid;justify-items:center;text-align:center;gap:12px;padding:30px 10px}
+.form-ok .ok-ico{width:60px;height:60px;border-radius:50%;display:grid;place-items:center;background:var(--grad-btn);color:#fff}
+.form-ok h3{color:#fff}
+.form-ok p{color:var(--muted-dark);max-width:40ch}
+
+/* ---------- Footer ---------- */
+.footer{padding:64px 0 28px}
+.foot-grid{display:grid;grid-template-columns:minmax(0,1.4fr) repeat(4,minmax(0,1fr));gap:32px}
+.foot-brand p{color:var(--muted-dark);margin-top:16px;max-width:30ch;font-size:.95rem}
+.foot-col h4{font:600 12px/1 var(--font-body);letter-spacing:.12em;text-transform:uppercase;color:#7F8DA8}
+.foot-col ul{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:10px}
+.foot-col a{color:#D5DEEC;text-decoration:none;font-size:.95rem}
+.foot-col a:hover{color:#fff}
+.foot-col .soon{color:#7F8DA8;font-size:.95rem}
+.foot-col .soon small{font-size:11px;margin-left:6px;padding:2px 7px;border-radius:99px;border:1px solid rgba(255,255,255,.14)}
+.foot-bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;margin-top:48px;padding-top:24px;border-top:1px solid rgba(255,255,255,.1);font-size:.875rem;color:#7F8DA8}
+
+/* ---------- Entrada das seções (scroll-driven, sem esconder conteúdo) ---------- */
+@supports (animation-timeline: view()){
+  @media (prefers-reduced-motion: no-preference){
+    .reveal{animation:rise linear both;animation-timeline:view();animation-range:entry 0% entry 35%}
+  }
+}
+@keyframes rise{from{transform:translateY(28px)}to{transform:none}}
+
+/* ---------- Responsivo ---------- */
+/* Efeito "saindo da tela": o mockup do Fluxor ultrapassa o cartão escuro do hero */
+@media (min-width:1025px){
+  .hero-card{overflow:visible;z-index:2}
+  .hero-visual{margin-bottom:-130px;z-index:3}
+  .hero .device{margin-right:-240px}
+}
+@media (max-width:1180px){
+  .hero .device{width:700px;margin-right:-240px}
+  .nav-links a{padding:10px 10px}
+}
+@media (max-width:1024px){
+  .nav-links,.nav-cta{display:none}
+  .nav-toggle{display:inline-flex}
+  .nav-inner{padding:8px 8px 8px 18px}
+  .hero-grid{grid-template-columns:minmax(0,1fr)}
+  .hero-card{padding-top:132px}
+  .hero-copy{max-width:640px}
+  .hero-visual{margin-top:16px}
+  .hero .device{width:100%;margin-right:0;transform:rotateX(6deg)}
+  .hero .chip-b{left:auto;right:16px}
+  .hero .chip-a{left:12px}
+  .about,.tower,.beyond,.cta-grid,.fluxor-head,.sec-head{grid-template-columns:minmax(0,1fr)}
+  .features,.benefits{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .products,.plans{grid-template-columns:minmax(0,1fr);max-width:620px;margin-inline:auto}
+  .plan.featured{transform:none}.plan.featured:hover{transform:translateY(-4px)}
+  .eco-list{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .journey{grid-template-columns:minmax(0,1fr)}
+  .journey li:not(:last-child)::after{right:auto;left:30px;top:auto;bottom:-12px;transform:rotate(135deg)}
+  .foot-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .foot-brand{grid-column:1/-1}
+  .stage .chip-c,.stage .chip-d{display:none}
+  .detail-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .detail-grid .panel:first-child{grid-column:1/-1}
+}
+@media (max-width:820px){
+  .steps{grid-template-columns:minmax(0,1fr);gap:0}
+  .steps-line{left:35px;right:auto;top:36px;bottom:36px;width:3px;height:auto;background:linear-gradient(180deg,#22D3EE,#2563EB 52%,#7C3AED)}
+  .steps-line::after{width:auto;height:90px;left:0;right:0;background:linear-gradient(180deg,transparent,rgba(255,255,255,.95),transparent);animation:travel-y 3.6s ease-in-out infinite}
+  @keyframes travel-y{from{top:-90px}to{top:100%}}
+  .step{grid-template-columns:72px minmax(0,1fr);justify-items:start;text-align:left;gap:4px 20px;padding-bottom:28px}
+  .step-n{grid-row:span 2}
+  .step h3{margin-top:14px}
+  .stage .app,.app{grid-template-columns:minmax(0,1fr)}
+  .app-side{display:none}
+  .rules{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:640px){
+  .wrap{padding-inline:16px}
+  .nav{padding-inline:12px;top:calc(env(safe-area-inset-top,0px) + 12px)}
+  .dark-card{margin:8px;border-radius:24px}
+  .hero-card{padding:112px 0 48px;min-height:0}
+  .hero h1{font-size:clamp(2.2rem,10.5vw,2.8rem)}
+  .hero-ctas .btn{width:100%}
+  .hero-ind{gap:14px}
+  .hero-ind li{max-width:none;width:100%}
+  .hero .chip-a,.hero .chip-b{display:none}
+  .device{padding:7px;border-radius:18px}
+  .app{border-radius:12px;min-height:0}
+  .app-main{padding:12px;gap:10px}
+  .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .app-grid,.detail-grid{grid-template-columns:minmax(0,1fr)}
+  .app-grid .panel.recent{display:none}
+  .app-search span{overflow:hidden;text-overflow:ellipsis}
+  .sec{padding:72px 0}
+  .sec-tight{padding:56px 0}
+  .eco-list{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .eco-list li{justify-content:flex-start}
+  .pillars,.features,.benefits{grid-template-columns:minmax(0,1fr)}
+  .tabs{width:100%;border-radius:20px}
+  .tab{flex:1 1 auto;justify-content:center;padding:0 12px}
+  .fluxor-card,.cta-card{padding:72px 0}
+  .journey-card{padding:64px 0}
+  .beyond{padding:28px 20px}
+  .ctl{padding:14px}
+  .ctl-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .exc li{grid-template-columns:4px minmax(0,1fr) auto}
+  .exc .who{display:none}
+  .watch{grid-template-columns:minmax(0,1fr)}
+  .fields{grid-template-columns:minmax(0,1fr)}
+  .form{padding:22px 18px}
+  .cta-btns .btn{width:100%}
+  .foot-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 20px}
+  .product,.plan{padding:24px}
+}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+  .draw{stroke-dashoffset:0}
+}
+</style>
+
+<!-- Sprite de ícones (SVG inline, sem dependências) -->
+<svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g-fx" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#22D3EE"/><stop offset=".5" stop-color="#2563EB"/><stop offset="1" stop-color="#7C3AED"/></linearGradient>
+    <linearGradient id="g-line" x1="0" x2="1"><stop offset="0" stop-color="#22D3EE"/><stop offset=".5" stop-color="#2563EB"/><stop offset="1" stop-color="#7C3AED"/></linearGradient>
+    <linearGradient id="g-area" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2563EB" stop-opacity=".28"/><stop offset="1" stop-color="#7C3AED" stop-opacity="0"/></linearGradient>
+  </defs>
+  <!-- Identidade provisória do Fluxor: três nós conectados em fluxo -->
+  <symbol id="fx" viewBox="0 0 40 40"><rect width="40" height="40" rx="12" fill="url(#g-fx)"/><path d="M11 12.5h9.5c4.2 0 4.2 7.5 8.5 7.5M11 27.5h9.5c4.2 0 4.2-7.5 8.5-7.5" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/><circle cx="11" cy="12.5" r="3" fill="#fff"/><circle cx="11" cy="27.5" r="3" fill="#fff"/><circle cx="29.5" cy="20" r="3.6" fill="#fff"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 4.5 6v5.5c0 4.6 3.2 8.4 7.5 9.5 4.3-1.1 7.5-4.9 7.5-9.5V6L12 3Z"/><path d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1Z"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></symbol>
+  <symbol id="i-truck" viewBox="0 0 24 24"><path d="M2 6h11v10H2zM13 9h4.5L21 12.5V16h-8z"/><circle cx="6" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></symbol>
+  <symbol id="i-ops" viewBox="0 0 24 24"><path d="M3 12h4l3-8 4 16 3-8h4"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4.5" y="10.5" width="15" height="10" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></symbol>
+  <symbol id="i-db" viewBox="0 0 24 24"><ellipse cx="12" cy="5.5" rx="7.5" ry="2.8"/><path d="M4.5 5.5v6.5c0 1.6 3.4 2.8 7.5 2.8s7.5-1.2 7.5-2.8V5.5M4.5 12v6.5c0 1.6 3.4 2.8 7.5 2.8s7.5-1.2 7.5-2.8V12"/></symbol>
+  <symbol id="i-cpu" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9.5 9.5h5v5h-5zM9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/></symbol>
+  <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 3 9 5-9 5-9-5 9-5Z"/><path d="m3 13 9 5 9-5"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 3H6.5A1.5 1.5 0 0 0 5 4.5v15A1.5 1.5 0 0 0 6.5 21h11a1.5 1.5 0 0 0 1.5-1.5V8z"/><path d="M14 3v5h5M8.5 13h7M8.5 17h5"/></symbol>
+  <symbol id="i-radar" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><path d="M12 12 18 6"/><circle cx="12" cy="12" r="1.2"/></symbol>
+  <symbol id="i-flow" viewBox="0 0 24 24"><rect x="3" y="3" width="6" height="6" rx="1.5"/><rect x="15" y="15" width="6" height="6" rx="1.5"/><rect x="15" y="3" width="6" height="6" rx="1.5"/><path d="M9 6h6M18 9v6"/></symbol>
+  <symbol id="i-check-sq" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="4"/><path d="m8 12 3 3 5-6"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 9a6 6 0 0 1 12 0c0 6 2.5 7.5 2.5 7.5h-17S6 15 6 9Z"/><path d="M10 20a2 2 0 0 0 4 0"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="M10.3 3.9 2.4 17.5A2 2 0 0 0 4.1 20.5h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/><path d="M12 9v4.5M12 17h.01"/></symbol>
+  <symbol id="i-zap" viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></symbol>
+  <symbol id="i-audit" viewBox="0 0 24 24"><path d="M9 3h6l1 2h3v16H5V5h3z"/><path d="m9 13 2 2 4-4"/></symbol>
+  <symbol id="i-plug" viewBox="0 0 24 24"><path d="M9 2v5M15 2v5M6 7h12v4a6 6 0 0 1-12 0zM12 17v5"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.6-3.4 3.3-5.5 6.5-5.5s5.9 2.1 6.5 5.5"/><path d="M16 4.6a3.5 3.5 0 0 1 0 6.8M18.5 14.8c1.7.7 2.8 2.3 3 5.2"/></symbol>
+  <symbol id="i-box" viewBox="0 0 24 24"><path d="m12 2.5 8.5 4.7v9.6L12 21.5l-8.5-4.7V7.2z"/><path d="m3.5 7.2 8.5 4.8 8.5-4.8M12 12v9.5"/></symbol>
+  <symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z"/></symbol>
+  <symbol id="i-code" viewBox="0 0 24 24"><path d="m8 7-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></symbol>
+  <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-funnel" viewBox="0 0 24 24"><path d="M3 4h18l-7 8.5V19l-4 2v-8.5z"/></symbol>
+  <symbol id="i-rocket" viewBox="0 0 24 24"><path d="M5 15c-1.5 1.3-2 5-2 5s3.7-.5 5-2c.8-.9.7-2.2-.1-3s-2.1-.8-2.9 0Z"/><path d="M12 15 9 12a22 22 0 0 1 2-4 12.9 12.9 0 0 1 11-6c0 2.7-.8 7.5-6 11a22 22 0 0 1-4 2Z"/><path d="M9 12H4s.6-3 2-4c1.6-1.1 5 0 5 0M12 15v5s3-.6 4-2c1.1-1.6 0-5 0-5"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24"><path d="M9 6h11M9 12h11M9 18h11M4.5 6h.01M4.5 12h.01M4.5 18h.01"/></symbol>
+  <symbol id="i-detail" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="3"/><path d="M8 8.5h8M8 12h8M8 15.5h5"/></symbol>
+  <symbol id="i-task" viewBox="0 0 24 24"><path d="M9 6h11M9 12h11M9 18h11"/><path d="m3.5 6 1 1 2-2M3.5 12l1 1 2-2M3.5 18l1 1 2-2"/></symbol>
+  <symbol id="i-sparkle" viewBox="0 0 24 24"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-msg" viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.8 7L4 20.5 5.5 16A8 8 0 1 1 21 12Z"/></symbol>
+</svg>
+
+<!-- ================= Navbar ================= -->
+<header class="nav" id="nav" data-component="Navbar">
+  <div class="nav-inner">
+    <a class="brand" href="#inicio" aria-label="ELSEM — início">
+      <img class="brand-full" src="assets/elsem-logo-full.webp" alt="ELSEM Tecnologia" width="2000" height="667">
+    </a>
+    <nav aria-label="Navegação principal" style="margin-inline:auto"><ul class="nav-links" data-render="nav"></ul></nav>
+    <a class="btn btn-grad btn-sm nav-cta" href="#contato" data-cta="especialista">Falar com especialista <svg class="ico"><use href="#i-arrow"/></svg></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Abrir menu"><svg class="ico"><use href="#i-menu"/></svg></button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu" hidden>
+    <ul data-render="nav-mobile"></ul>
+    <a class="btn btn-grad" href="#contato" data-cta="especialista">Falar com especialista <svg class="ico"><use href="#i-arrow"/></svg></a>
+  </div>
+</header>
+
+<main>
+<!-- ================= Hero ================= -->
+<section class="hero" id="inicio" data-component="Hero">
+  <div class="dark-card hero-card">
+    <div class="bg bg-glow"></div><div class="bg bg-grid"></div><div class="bg bg-dots"></div>
+    <svg class="flow-lines" viewBox="0 0 1400 400" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0 300 C300 260 500 360 800 280 S1200 180 1400 220" stroke="url(#g-line)"/>
+      <path d="M0 350 C250 330 520 390 820 330 S1180 260 1400 300" stroke="url(#g-line)" style="animation-duration:24s;opacity:.6"/>
+    </svg>
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow pill">Tecnologia para a logística real</span>
+        <h1>Transformamos desafios operacionais em <span class="grad-text">soluções digitais.</span></h1>
+        <p class="hero-sub">A ELSEM desenvolve produtos SaaS, plataformas e soluções tecnológicas para tornar operações logísticas mais seguras, eficientes e inteligentes.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-grad" href="#produtos">Conheça nossos produtos <svg class="ico"><use href="#i-arrow"/></svg></a>
+          <a class="btn btn-ghost" href="#contato" data-cta="especialista">Falar com especialista</a>
+        </div>
+        <ul class="hero-ind">
+          <li><span class="ind-ico"><svg class="ico"><use href="#i-shield"/></svg></span>Mais segurança</li>
+          <li><span class="ind-ico"><svg class="ico"><use href="#i-gear"/></svg></span>Processos mais eficientes</li>
+          <li><span class="ind-ico"><svg class="ico"><use href="#i-chart"/></svg></span>Decisões baseadas em dados</li>
+        </ul>
+      </div>
+
+      <div class="hero-visual" data-component="ProductMockup">
+        <div class="chip-float chip-b"><span class="dot" style="background:rgba(34,211,238,.16);color:#22D3EE"><svg class="ico" style="width:16px;height:16px"><use href="#i-check-sq"/></svg></span><span><b>Aprovação concluída</b>Jurídico · SN-1279</span></div>
+        <div class="float">
+          <div class="device" role="img" aria-label="Tela ilustrativa do dashboard do Fluxor com indicadores de sinistros, gráfico de evolução, distribuição por tipo e sinistros recentes">
+            <div class="app" aria-hidden="true">
+              <aside class="app-side">
+                <div class="app-brand"><svg class="fx-mark"><use href="#fx"/></svg><span>Fluxor<small>por ELSEM</small></span></div>
+                <div class="app-nav on"><svg class="ico"><use href="#i-home"/></svg>Dashboard</div>
+                <div class="app-nav"><svg class="ico"><use href="#i-file"/></svg>Sinistros</div>
+                <div class="app-nav"><svg class="ico"><use href="#i-radar"/></svg>Torre de Controle<span class="cnt">5</span></div>
+                <div class="app-nav"><svg class="ico"><use href="#i-flow"/></svg>Fluxos</div>
+                <div class="app-nav"><svg class="ico"><use href="#i-task"/></svg>Tarefas</div>
+                <div class="app-nav"><svg class="ico"><use href="#i-layers"/></svg>Documentos</div>
+                <div class="app-nav"><svg class="ico"><use href="#i-chart"/></svg>Relatórios</div>
+                <div class="app-nav"><svg class="ico"><use href="#i-gear"/></svg>Configurações</div>
+              </aside>
+              <div class="app-main">
+                <div class="app-top">
+                  <div class="app-search"><svg class="ico"><use href="#i-search"/></svg><span>Buscar sinistro, placa, responsável…</span></div>
+                  <div class="app-icon notif"><svg class="ico"><use href="#i-bell"/></svg></div>
+                  <div class="avatar">OP</div>
+                </div>
+                <div class="app-head"><div><h4>Visão geral de sinistros</h4><span>Últimos 6 meses</span></div><span class="demo-tag">Dados ilustrativos</span></div>
+                <div class="kpis">
+                  <div class="kpi"><span>Total</span><b>128</b><small>sinistros</small></div>
+                  <div class="kpi run"><span>Em andamento</span><b>32</b><small>em etapas ativas</small></div>
+                  <div class="kpi done"><span>Concluídos</span><b>48</b><small>no período</small></div>
+                  <div class="kpi warn"><span>Atrasados</span><b>5</b><small>SLA vencido</small></div>
+                </div>
+                <div class="app-grid">
+                  <div class="panel chart">
+                    <div class="panel-h"><b>Evolução de sinistros</b><span>Jan–Jun</span></div>
+                    <svg viewBox="0 0 300 118" role="presentation">
+                      <g stroke="#EEF2F7" stroke-width="1"><path d="M0 20H300M0 50H300M0 80H300M0 106H300"/></g>
+                      <path d="M0 58 C30 58 30 34 60 34 C90 34 90 46 120 46 C150 46 150 19 180 19 C210 19 210 37 240 37 C270 37 270 22 300 22 L300 106 L0 106Z" fill="url(#g-area)"/>
+                      <path class="draw" d="M0 58 C30 58 30 34 60 34 C90 34 90 46 120 46 C150 46 150 19 180 19 C210 19 210 37 240 37 C270 37 270 22 300 22" fill="none" stroke="url(#g-line)" stroke-width="2.5" stroke-linecap="round"/>
+                      <circle cx="300" cy="22" r="4" fill="#7C3AED" stroke="#fff" stroke-width="2"/>
+                      <g text-anchor="middle"><text x="8" y="117">Jan</text><text x="60" y="117">Fev</text><text x="120" y="117">Mar</text><text x="180" y="117">Abr</text><text x="240" y="117">Mai</text><text x="292" y="117">Jun</text></g>
+                    </svg>
+                    <div class="panel-h" style="margin:10px 0 4px"><b>Por tipo</b><span>128 no total</span></div>
+                    <div class="types">
+                      <div class="type-row">Roubo<div class="bar"><i style="width:100%"></i></div><b>42</b></div>
+                      <div class="type-row">Avaria<div class="bar"><i style="width:90%"></i></div><b>38</b></div>
+                      <div class="type-row">Acidente<div class="bar"><i style="width:69%"></i></div><b>29</b></div>
+                      <div class="type-row">Extravio<div class="bar"><i style="width:45%"></i></div><b>19</b></div>
+                    </div>
+                  </div>
+                  <div class="panel recent">
+                    <div class="panel-h"><b>Sinistros recentes</b><span>SLA</span></div>
+                    <div class="list">
+                      <div class="li"><i class="sev" style="background:#F43F5E"></i><span><b>SN-1284</b> <em>Roubo</em></span><span class="sla late">Vencido</span></div>
+                      <div class="li"><i class="sev" style="background:#7C3AED"></i><span><b>SN-1283</b> <em>Avaria</em></span><span class="sla mid">4h</span></div>
+                      <div class="li"><i class="sev" style="background:#2563EB"></i><span><b>SN-1282</b> <em>Acidente</em></span><span class="sla ok">2d</span></div>
+                      <div class="li"><i class="sev" style="background:#22D3EE"></i><span><b>SN-1281</b> <em>Extravio</em></span><span class="sla ok">3d</span></div>
+                      <div class="li"><i class="sev" style="background:#7C3AED"></i><span><b>SN-1280</b> <em>Avaria</em></span><span class="sla mid">9h</span></div>
+                    </div>
+                    <div class="alert"><svg class="ico"><use href="#i-alert"/></svg><span><b>3 SLAs vencem hoje.</b> Aprovação jurídica concentra as pendências.</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="chip-float chip-a"><span class="dot" style="background:rgba(244,63,94,.16);color:#FDA4AF"><svg class="ico" style="width:16px;height:16px"><use href="#i-clock"/></svg></span><span><b>SLA vence em 4h</b>SN-1283 · Avaria de carga</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= Tecnologia para a logística real ================= -->
+<section class="eco" id="ecossistema" aria-labelledby="eco-t" data-component="EcosystemSection">
+  <div class="wrap">
+    <div class="eco-head">
+      <div><span class="eyebrow">Onde a ELSEM atua</span><h2 id="eco-t">Tecnologia para a logística real.</h2></div>
+      <p>Conhecimento operacional aplicado ao desenvolvimento de produtos e soluções digitais que resolvem problemas reais.</p>
+    </div>
+    <ul class="eco-list">
+      <li><svg class="ico"><use href="#i-truck"/></svg>Logística</li>
+      <li><svg class="ico"><use href="#i-shield"/></svg>Gestão de riscos</li>
+      <li><svg class="ico"><use href="#i-ops"/></svg>Operações</li>
+      <li><svg class="ico"><use href="#i-lock"/></svg>Segurança</li>
+      <li><svg class="ico"><use href="#i-db"/></svg>Dados</li>
+      <li><svg class="ico"><use href="#i-cpu"/></svg>Tecnologia</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= Sobre ================= -->
+<section class="sec" id="sobre" aria-labelledby="sobre-t" data-component="AboutElsen">
+  <div class="blobs"></div>
+  <div class="wrap about">
+    <div class="reveal">
+      <span class="eyebrow">Sobre a ELSEM</span>
+      <h2 class="h-sec" id="sobre-t" style="margin-top:14px"><span>Experiência de campo.</span><span class="grad-text">Tecnologia de produto.</span></h2>
+      <p class="lead">A ELSEM une experiência em logística, gestão de riscos e tecnologia para criar produtos e soluções que conectam pessoas, processos e dados.</p>
+    </div>
+    <div class="pillars">
+      <article class="pillar light-glass reveal"><div class="badge-ico"><svg class="ico"><use href="#i-truck"/></svg></div><h3>Logística</h3><p>Conhecimento da operação e dos desafios reais.</p></article>
+      <article class="pillar light-glass reveal"><div class="badge-ico"><svg class="ico"><use href="#i-shield"/></svg></div><h3>Gestão de riscos</h3><p>Processos orientados à prevenção, controle e redução de perdas.</p></article>
+      <article class="pillar light-glass reveal"><div class="badge-ico"><svg class="ico"><use href="#i-layers"/></svg></div><h3>SaaS</h3><p>Produtos próprios, configuráveis e escaláveis.</p></article>
+      <article class="pillar light-glass reveal"><div class="badge-ico"><svg class="ico"><use href="#i-db"/></svg></div><h3>Dados</h3><p>Informação para decisões melhores.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= Produtos ================= -->
+<section class="sec" id="produtos" aria-labelledby="prod-t" style="padding-top:24px" data-component="ProductsSection">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div><span class="eyebrow">Produtos ELSEM</span><h2 class="h-sec" id="prod-t">Produtos que transformam processos em <span class="grad-text">resultados.</span></h2></div>
+      <div class="side"><p>A ELSEM desenvolve produtos SaaS especializados para problemas reais da operação.</p></div>
+    </div>
+    <div class="products" data-render="products"></div>
+  </div>
+</section>
+
+<!-- ================= Fluxor ================= -->
+<section class="fluxor" id="fluxor" aria-labelledby="fx-t" data-component="FluxorSection">
+  <div class="dark-card fluxor-card on-dark">
+    <div class="bg bg-glow" style="transform:scaleX(-1)"></div><div class="bg bg-grid"></div>
+    <div class="wrap">
+      <div class="fluxor-head reveal">
+        <div>
+          <div class="fx-id"><svg class="fx-mark"><use href="#fx"/></svg><span><b>Fluxor</b><small>Um produto ELSEM · Gestão de Sinistros</small></span></div>
+          <h2 id="fx-t"><span>Do evento à resolução.</span><span class="grad-text">Tudo em fluxo.</span></h2>
+        </div>
+        <div class="side">
+          <p class="lead">O Fluxor organiza e orquestra o ciclo de vida dos sinistros, conectando pessoas, processos, documentos, responsabilidades e SLAs em um único ambiente.</p>
+          <a class="btn btn-grad" href="#contato" data-interest="Fluxor">Solicitar demonstração <svg class="ico"><use href="#i-arrow"/></svg></a>
+        </div>
+      </div>
+
+      <div class="tabs" role="tablist" aria-label="Telas do Fluxor">
+        <button class="tab" role="tab" id="tab-dash" aria-controls="pn-dash" aria-selected="true"><svg class="ico"><use href="#i-home"/></svg>Dashboard</button>
+        <button class="tab" role="tab" id="tab-list" aria-controls="pn-list" aria-selected="false" tabindex="-1"><svg class="ico"><use href="#i-list"/></svg>Sinistros</button>
+        <button class="tab" role="tab" id="tab-detail" aria-controls="pn-detail" aria-selected="false" tabindex="-1"><svg class="ico"><use href="#i-detail"/></svg>Detalhe do sinistro</button>
+        <button class="tab" role="tab" id="tab-flow" aria-controls="pn-flow" aria-selected="false" tabindex="-1"><svg class="ico"><use href="#i-flow"/></svg>Fluxos</button>
+      </div>
+
+      <div class="stage reveal">
+        <div class="chip-float chip-c"><span class="dot" style="background:rgba(124,58,237,.2);color:#C4B5FD"><svg class="ico" style="width:16px;height:16px"><use href="#i-file"/></svg></span><span><b>Laudo de vistoria anexado</b>SN-1284 · há 12 min</span></div>
+        <div class="chip-float chip-d"><span class="dot" style="background:rgba(34,211,238,.16);color:#22D3EE"><svg class="ico" style="width:16px;height:16px"><use href="#i-zap"/></svg></span><span><b>Tarefa criada automaticamente</b>Regra: roubo → notificar gerenciadora</span></div>
+        <div class="device">
+          <div class="app">
+            <aside class="app-side" aria-hidden="true">
+              <div class="app-brand"><svg class="fx-mark"><use href="#fx"/></svg><span>Fluxor<small>por ELSEM</small></span></div>
+              <div class="app-nav" data-side="dash"><svg class="ico"><use href="#i-home"/></svg>Dashboard</div>
+              <div class="app-nav" data-side="list"><svg class="ico"><use href="#i-file"/></svg>Sinistros</div>
+              <div class="app-nav"><svg class="ico"><use href="#i-radar"/></svg>Torre de Controle<span class="cnt">5</span></div>
+              <div class="app-nav" data-side="flow"><svg class="ico"><use href="#i-flow"/></svg>Fluxos</div>
+              <div class="app-nav"><svg class="ico"><use href="#i-task"/></svg>Tarefas</div>
+              <div class="app-nav"><svg class="ico"><use href="#i-layers"/></svg>Documentos</div>
+              <div class="app-nav"><svg class="ico"><use href="#i-audit"/></svg>Auditoria</div>
+              <div class="app-nav"><svg class="ico"><use href="#i-chart"/></svg>Indicadores</div>
+            </aside>
+            <div class="app-main">
+              <div class="app-top" aria-hidden="true">
+                <div class="app-search"><svg class="ico"><use href="#i-search"/></svg><span>Buscar sinistro, placa, responsável…</span></div>
+                <div class="app-icon notif"><svg class="ico"><use href="#i-bell"/></svg></div>
+                <div class="avatar">OP</div>
+              </div>
+
+              <!-- Dashboard -->
+              <div class="tabpanel" role="tabpanel" id="pn-dash" aria-labelledby="tab-dash">
+                <div class="app-head"><div><h4>Dashboard de sinistros</h4><span>Visão consolidada · últimos 6 meses</span></div><span class="demo-tag">Dados ilustrativos</span></div>
+                <div class="kpis">
+                  <div class="kpi"><span>Total</span><b>128</b><small>sinistros</small></div>
+                  <div class="kpi run"><span>Em andamento</span><b>32</b><small>em etapas ativas</small></div>
+                  <div class="kpi done"><span>Concluídos</span><b>48</b><small>no período</small></div>
+                  <div class="kpi warn"><span>Atrasados</span><b>5</b><small>SLA vencido</small></div>
+                </div>
+                <div class="app-grid">
+                  <div class="panel chart">
+                    <div class="panel-h"><b>Abertos x concluídos</b><span>Jan–Jun</span></div>
+                    <svg viewBox="0 0 300 130" role="presentation">
+                      <g stroke="#EEF2F7"><path d="M0 20H300M0 55H300M0 90H300M0 118H300"/></g>
+                      <g fill="url(#g-fx)">
+                        <rect x="14" y="58" width="14" height="60" rx="4"/><rect x="64" y="34" width="14" height="84" rx="4"/><rect x="114" y="46" width="14" height="72" rx="4"/><rect x="164" y="20" width="14" height="98" rx="4"/><rect x="214" y="38" width="14" height="80" rx="4"/><rect x="264" y="26" width="14" height="92" rx="4"/>
+                      </g>
+                      <g fill="#C7D2FE">
+                        <rect x="30" y="78" width="14" height="40" rx="4"/><rect x="80" y="62" width="14" height="56" rx="4"/><rect x="130" y="60" width="14" height="58" rx="4"/><rect x="180" y="52" width="14" height="66" rx="4"/><rect x="230" y="50" width="14" height="68" rx="4"/><rect x="280" y="44" width="14" height="74" rx="4"/>
+                      </g>
+                      <g text-anchor="middle"><text x="29" y="129">Jan</text><text x="79" y="129">Fev</text><text x="129" y="129">Mar</text><text x="179" y="129">Abr</text><text x="229" y="129">Mai</text><text x="279" y="129">Jun</text></g>
+                    </svg>
+                    <div class="filters" style="margin-top:8px"><span class="filter on">Abertos</span><span class="filter">Concluídos</span></div>
+                  </div>
+                  <div class="panel">
+                    <div class="panel-h"><b>SLA por etapa</b><span>no prazo</span></div>
+                    <div class="types">
+                      <div class="type-row" style="grid-template-columns:84px minmax(0,1fr) 30px">Registro<div class="bar"><i style="width:96%"></i></div><b>96%</b></div>
+                      <div class="type-row" style="grid-template-columns:84px minmax(0,1fr) 30px">Classificação<div class="bar"><i style="width:91%"></i></div><b>91%</b></div>
+                      <div class="type-row" style="grid-template-columns:84px minmax(0,1fr) 30px">Vistoria<div class="bar"><i style="width:82%"></i></div><b>82%</b></div>
+                      <div class="type-row" style="grid-template-columns:84px minmax(0,1fr) 30px">Aprovação<div class="bar"><i style="width:68%"></i></div><b>68%</b></div>
+                      <div class="type-row" style="grid-template-columns:84px minmax(0,1fr) 30px">Indenização<div class="bar"><i style="width:88%"></i></div><b>88%</b></div>
+                    </div>
+                    <div class="alert"><svg class="ico"><use href="#i-alert"/></svg><span><b>Aprovação</b> é a etapa com menor cumprimento de SLA.</span></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Lista de sinistros -->
+              <div class="tabpanel" role="tabpanel" id="pn-list" aria-labelledby="tab-list" hidden>
+                <div class="app-head"><div><h4>Sinistros</h4><span>32 em andamento</span></div><span class="demo-tag">Dados ilustrativos</span></div>
+                <div class="filters"><span class="filter on">Todos</span><span class="filter">Roubo</span><span class="filter">Avaria</span><span class="filter">Acidente</span><span class="filter">Extravio</span><span class="filter">SLA vencido</span></div>
+                <div class="tbl-wrap">
+                  <table class="tbl">
+                    <thead><tr><th>Sinistro</th><th>Tipo</th><th>Etapa</th><th>Responsável</th><th>Progresso</th><th>SLA</th></tr></thead>
+                    <tbody>
+                      <tr><td><b>SN-1284</b></td><td>Roubo de carga</td><td><span class="stage-pill">Aprovação</span></td><td>Jurídico</td><td><span class="prog"><i style="width:62%"></i></span>62%</td><td><span class="sla late">Vencido 6h</span></td></tr>
+                      <tr><td><b>SN-1283</b></td><td>Avaria</td><td><span class="stage-pill">Vistoria</span></td><td>Operação</td><td><span class="prog"><i style="width:40%"></i></span>40%</td><td><span class="sla mid">4h</span></td></tr>
+                      <tr><td><b>SN-1282</b></td><td>Acidente</td><td><span class="stage-pill">Classificação</span></td><td>Gestão de risco</td><td><span class="prog"><i style="width:22%"></i></span>22%</td><td><span class="sla ok">2 dias</span></td></tr>
+                      <tr><td><b>SN-1281</b></td><td>Extravio</td><td><span class="stage-pill">Indenização</span></td><td>Financeiro</td><td><span class="prog"><i style="width:84%"></i></span>84%</td><td><span class="sla ok">3 dias</span></td></tr>
+                      <tr><td><b>SN-1280</b></td><td>Avaria</td><td><span class="stage-pill">Documentação</span></td><td>Transportadora</td><td><span class="prog"><i style="width:35%"></i></span>35%</td><td><span class="sla mid">9h</span></td></tr>
+                      <tr><td><b>SN-1279</b></td><td>Roubo de carga</td><td><span class="stage-pill">Regulação</span></td><td>Seguradora</td><td><span class="prog"><i style="width:71%"></i></span>71%</td><td><span class="sla ok">5 dias</span></td></tr>
+                      <tr><td><b>SN-1278</b></td><td>Acidente</td><td><span class="stage-pill">Aprovação</span></td><td>Jurídico</td><td><span class="prog"><i style="width:58%"></i></span>58%</td><td><span class="sla late">Vencido 1d</span></td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <!-- Detalhe do sinistro -->
+              <div class="tabpanel" role="tabpanel" id="pn-detail" aria-labelledby="tab-detail" hidden>
+                <div class="detail-head">
+                  <div><h4>SN-1284 · Roubo de carga</h4><p>Aberto há 3 dias · Fluxo: Roubo com seguro RCF-DC</p></div>
+                  <div class="meta"><span class="stage-pill">Etapa: Aprovação</span><span class="sla late">SLA vencido 6h</span><span class="demo-tag">Dados ilustrativos</span></div>
+                </div>
+                <div class="detail-grid">
+                  <div class="panel">
+                    <div class="panel-h"><b>Timeline</b><span>Auditoria completa</span></div>
+                    <ol class="tl">
+                      <li class="done"><b>Registro do sinistro</b>Operação · B.O. e dados da viagem</li>
+                      <li class="done"><b>Classificação</b>Gestão de risco · Roubo, carga integral</li>
+                      <li class="done"><b>Comunicação à seguradora</b>Notificação automática enviada</li>
+                      <li class="now"><b>Aprovação jurídica</b>Jurídico · aguardando parecer</li>
+                      <li><b>Indenização</b>Financeiro</li>
+                      <li><b>Encerramento</b>Auditoria e indicadores</li>
+                    </ol>
+                  </div>
+                  <div class="panel">
+                    <div class="panel-h"><b>Documentos</b><span>5 de 6</span></div>
+                    <ul class="docs">
+                      <li><svg class="ico"><use href="#i-file"/></svg>Boletim de ocorrência<em>PDF</em></li>
+                      <li><svg class="ico"><use href="#i-file"/></svg>Nota fiscal da carga<em>XML</em></li>
+                      <li><svg class="ico"><use href="#i-file"/></svg>Manifesto (MDF-e)<em>PDF</em></li>
+                      <li><svg class="ico"><use href="#i-file"/></svg>Relatório de rastreamento<em>PDF</em></li>
+                      <li><svg class="ico"><use href="#i-file"/></svg>Fotos da ocorrência<em>12</em></li>
+                      <li style="border:1px dashed #CBD5E1;background:#fff;color:#64748B"><svg class="ico"><use href="#i-plus"/></svg>Parecer jurídico<em>pendente</em></li>
+                    </ul>
+                  </div>
+                  <div class="panel">
+                    <div class="panel-h"><b>Tarefas</b><span>3 de 5</span></div>
+                    <ul class="tasks">
+                      <li class="ok"><span class="box"><svg class="ico"><use href="#i-check"/></svg></span><span>Anexar B.O.<small>Operação</small></span></li>
+                      <li class="ok"><span class="box"><svg class="ico"><use href="#i-check"/></svg></span><span>Notificar seguradora<small>Automática</small></span></li>
+                      <li class="ok"><span class="box"><svg class="ico"><use href="#i-check"/></svg></span><span>Validar rastreamento<small>Gestão de risco</small></span></li>
+                      <li><span class="box"></span><span>Emitir parecer<small>Jurídico · vence hoje</small></span></li>
+                      <li><span class="box"></span><span>Calcular indenização<small>Financeiro</small></span></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Fluxos -->
+              <div class="tabpanel" role="tabpanel" id="pn-flow" aria-labelledby="tab-flow" hidden>
+                <div class="app-head"><div><h4>Fluxo: Avaria de carga</h4><span>Etapas, responsáveis e SLA configuráveis</span></div><span class="demo-tag">Exemplo de fluxo</span></div>
+                <div class="flow-canvas">
+                  <div class="flow-row">
+                    <div class="node start"><b>Registro</b>Operação<br><span class="sla ok">SLA 2h</span></div>
+                    <div class="edge"></div>
+                    <div class="node"><b>Classificação</b>Gestão de risco<br><span class="sla ok">SLA 4h</span></div>
+                    <div class="edge"></div>
+                    <div class="node decision"><b>Valor &gt; limite?</b>Regra automática<br><span class="sla mid">Decisão</span></div>
+                    <div class="edge"></div>
+                    <div class="branch">
+                      <div class="node"><b>Aprovação jurídica</b>Jurídico<br><span class="sla mid">SLA 24h</span></div>
+                      <div class="node"><b>Aprovação gestor</b>Gestor da área<br><span class="sla ok">SLA 8h</span></div>
+                    </div>
+                    <div class="edge"></div>
+                    <div class="node end"><b>Indenização</b>Financeiro<br><span class="sla ok">SLA 5d</span></div>
+                  </div>
+                </div>
+                <div class="rules">
+                  <div class="rule"><span class="kw">SE</span> tipo = <b>Roubo</b><br><span class="kw">ENTÃO</span> notificar gerenciadora de risco</div>
+                  <div class="rule"><span class="kw">SE</span> SLA &lt; <b>20%</b> restante<br><span class="kw">ENTÃO</span> alertar responsável e gestor</div>
+                  <div class="rule"><span class="kw">SE</span> etapa = <b>Indenização</b><br><span class="kw">ENTÃO</span> exigir parecer anexado</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= Torre de Controle ================= -->
+<section class="sec" id="torre" aria-labelledby="torre-t" data-component="ControlTower">
+  <div class="blobs"></div>
+  <div class="wrap tower">
+    <div class="reveal">
+      <span class="eyebrow">Fluxor · Torre de Controle</span>
+      <h2 class="h-sec" id="torre-t" style="margin-top:14px"><span>Não espere o atraso acontecer.</span><span class="grad-text">Veja onde agir.</span></h2>
+      <span class="tag-exc"><i></i>Central de exceções operacionais</span>
+      <p class="lead">A Torre de Controle não mostra tudo. Mostra o que saiu do esperado: o sinistro crítico, o SLA que venceu, a etapa que travou e quem precisa agir agora.</p>
+      <ul class="watch">
+        <li><svg class="ico"><use href="#i-alert"/></svg>Sinistros críticos</li>
+        <li><svg class="ico"><use href="#i-clock"/></svg>SLA vencido</li>
+        <li><svg class="ico"><use href="#i-clock"/></svg>SLA próximo do vencimento</li>
+        <li><svg class="ico"><use href="#i-task"/></svg>Pendências</li>
+        <li><svg class="ico"><use href="#i-funnel"/></svg>Gargalos</li>
+        <li><svg class="ico"><use href="#i-users"/></svg>Responsáveis</li>
+      </ul>
+    </div>
+    <div class="ctl reveal" role="img" aria-label="Tela ilustrativa da Torre de Controle do Fluxor com contadores de exceções, gargalo identificado e lista de sinistros que exigem ação">
+      <div aria-hidden="true">
+        <div class="ctl-top"><div><h3>Torre de Controle</h3><span>Exceções que exigem ação</span></div><div style="display:flex;gap:10px;align-items:center"><span class="live">Ao vivo</span><span class="demo-tag">Dados ilustrativos</span></div></div>
+        <div class="ctl-kpis">
+          <div class="ctl-kpi crit"><span>Críticos</span><b>4</b></div>
+          <div class="ctl-kpi crit"><span>SLA vencido</span><b>5</b></div>
+          <div class="ctl-kpi"><span>Vence em 24h</span><b>9</b></div>
+          <div class="ctl-kpi"><span>Pendências</span><b>14</b></div>
+        </div>
+        <div class="bottleneck"><svg class="ico"><use href="#i-funnel"/></svg><span><b>Gargalo: Aprovação jurídica</b> · 6 sinistros parados há mais de 48h</span></div>
+        <ul class="exc">
+          <li><i class="stripe"></i><span><b>SN-1284 · Roubo de carga</b><em>SLA vencido há 6h · parecer pendente</em></span><span class="who">Jurídico</span><span class="act">Agir</span></li>
+          <li><i class="stripe"></i><span><b>SN-1278 · Acidente</b><em>SLA vencido há 1 dia · sem responsável ativo</em></span><span class="who">Jurídico</span><span class="act">Atribuir</span></li>
+          <li class="mid"><i class="stripe"></i><span><b>SN-1283 · Avaria</b><em>Vence em 4h · vistoria não iniciada</em></span><span class="who">Operação</span><span class="act">Agir</span></li>
+          <li class="mid"><i class="stripe"></i><span><b>SN-1280 · Avaria</b><em>Vence em 9h · faltam 2 documentos</em></span><span class="who">Transportadora</span><span class="act">Cobrar</span></li>
+          <li class="pend"><i class="stripe"></i><span><b>SN-1276 · Extravio</b><em>Aguardando retorno da seguradora</em></span><span class="who">Seguradora</span><span class="act">Ver</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= Como funciona ================= -->
+<section class="sec-tight" id="como-funciona" aria-labelledby="como-t" data-component="HowItWorks">
+  <div class="wrap">
+    <div class="pricing-head reveal"><span class="eyebrow">Como funciona</span><h2 class="h-sec" id="como-t">Do registro à auditoria, em cinco etapas.</h2></div>
+    <div style="position:relative"><span class="steps-line" aria-hidden="true"></span>
+    <ol class="steps">
+      <li class="step"><div class="step-n"><span>01</span></div><h3>Registre</h3><p>Abertura do sinistro com dados, fotos e documentos desde o primeiro minuto.</p></li>
+      <li class="step"><div class="step-n"><span>02</span></div><h3>Organize</h3><p>Classificação, fluxo e responsáveis definidos para cada tipo de ocorrência.</p></li>
+      <li class="step"><div class="step-n"><span>03</span></div><h3>Acompanhe</h3><p>Etapas, prazos e pendências visíveis para todas as áreas envolvidas.</p></li>
+      <li class="step"><div class="step-n"><span>04</span></div><h3>Automatize</h3><p>Tarefas, notificações e regras de SLA disparadas sem trabalho manual.</p></li>
+      <li class="step"><div class="step-n"><span>05</span></div><h3>Audite</h3><p>Histórico completo e rastreável de cada decisão, documento e prazo.</p></li>
+    </ol></div>
+  </div>
+</section>
+
+<!-- ================= Recursos ================= -->
+<section class="sec" id="recursos" aria-labelledby="rec-t" style="padding-top:48px" data-component="Features">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div><span class="eyebrow">Recursos do Fluxor</span><h2 class="h-sec" id="rec-t">Gestão de sinistros, ponta a ponta.</h2></div>
+      <div class="side"><p>Cada recurso existe para tirar o sinistro do e-mail e da planilha e colocá-lo em um processo controlado.</p></div>
+    </div>
+    <div class="features" data-render="features"></div>
+  </div>
+</section>
+
+<!-- ================= Além do software ================= -->
+<section class="sec" id="solucoes" aria-labelledby="sol-t" style="padding-top:24px" data-component="Solutions">
+  <div class="blobs"></div>
+  <div class="wrap">
+    <div class="beyond reveal">
+      <div>
+        <span class="eyebrow">Soluções ELSEM</span>
+        <h2 id="sol-t" style="margin-top:14px">Além do software.</h2>
+        <span class="underline" aria-hidden="true"></span>
+        <p class="lead">Quando o desafio exige mais do que uma plataforma pronta, a ELSEM atua com consultoria, estruturação de processos e desenvolvimento de soluções tecnológicas.</p>
+        <a class="btn btn-grad" href="#contato" data-interest="Consultoria">Conversar sobre o meu desafio <svg class="ico"><use href="#i-arrow"/></svg></a>
+      </div>
+      <div class="offer" data-render="solutions"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= Da operação para a tecnologia ================= -->
+<section aria-labelledby="jor-t" data-component="Journey">
+  <div class="dark-card journey-card on-dark">
+    <div class="bg bg-glow"></div><div class="bg bg-dots" style="opacity:.25"></div>
+    <div class="wrap">
+      <div class="reveal" style="text-align:center;display:grid;justify-items:center;gap:12px">
+        <span class="eyebrow pill">Método ELSEM</span>
+        <h2 class="h-sec" id="jor-t">Da operação para a tecnologia.</h2>
+      </div>
+      <ol class="journey">
+        <li><svg class="ico"><use href="#i-target"/></svg><h3>Desafio</h3><p>O problema real, como ele acontece na operação.</p></li>
+        <li><svg class="ico"><use href="#i-compass"/></svg><h3>Diagnóstico</h3><p>Causas, impactos, áreas e dados envolvidos.</p></li>
+        <li><svg class="ico"><use href="#i-flow"/></svg><h3>Processo</h3><p>O fluxo certo antes de qualquer linha de código.</p></li>
+        <li><svg class="ico"><use href="#i-code"/></svg><h3>Tecnologia</h3><p>Produto, sistema, integração ou automação.</p></li>
+        <li><svg class="ico"><use href="#i-rocket"/></svg><h3>Resultado</h3><p>Mais segurança, eficiência e controle.</p></li>
+      </ol>
+      <p class="quote reveal">A tecnologia começa pelo problema, <span class="grad-text">não pelo software.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= Benefícios ================= -->
+<section class="sec" id="beneficios" aria-labelledby="ben-t" data-component="Benefits">
+  <div class="wrap">
+    <div class="pricing-head reveal"><span class="eyebrow">Benefícios</span><h2 class="h-sec" id="ben-t" style="max-width:20ch">Tecnologia que gera segurança, eficiência e resultado.</h2></div>
+    <div class="benefits">
+      <article class="benefit reveal"><div class="b-ico"><svg class="ico"><use href="#i-eye"/></svg></div><h3>Mais controle</h3><p>Visibilidade sobre cada etapa.</p></article>
+      <article class="benefit reveal"><div class="b-ico"><svg class="ico"><use href="#i-funnel"/></svg></div><h3>Menos gargalos</h3><p>Identificação de atrasos e pendências.</p></article>
+      <article class="benefit reveal"><div class="b-ico"><svg class="ico"><use href="#i-zap"/></svg></div><h3>Mais produtividade</h3><p>Automação de tarefas e rotinas.</p></article>
+      <article class="benefit reveal"><div class="b-ico"><svg class="ico"><use href="#i-audit"/></svg></div><h3>Mais governança</h3><p>Rastreabilidade e auditoria.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= Planos ================= -->
+<section class="sec" id="planos" aria-labelledby="plan-t" style="padding-top:24px" data-component="Pricing">
+  <div class="blobs"></div>
+  <div class="wrap">
+    <div class="pricing-head reveal"><span class="eyebrow">Planos do Fluxor</span><h2 class="h-sec" id="plan-t" style="max-width:22ch">Escolha o nível de estrutura para sua operação.</h2><p>Implantação única e mensalidade fixa. Sem surpresa no contrato.</p></div>
+    <div class="plans" data-render="plans"></div>
+    <p class="pricing-note">Valores em reais. Escopo final de cada plano confirmado na proposta comercial.</p>
+  </div>
+</section>
+
+<!-- ================= CTA + Formulário ================= -->
+<section id="contato" aria-labelledby="cta-t" data-component="CTA">
+  <div class="dark-card cta-card on-dark">
+    <div class="bg bg-glow"></div><div class="bg bg-grid"></div>
+    <div class="wrap cta-grid">
+      <div class="reveal">
+        <span class="eyebrow pill">Fale com a ELSEM</span>
+        <h2 id="cta-t" style="margin-top:22px"><span>Leve a tecnologia da ELSEM</span><span class="grad-text">para a sua operação.</span></h2>
+        <p class="lead">Converse com nossos especialistas e descubra como produtos, consultoria e tecnologia podem gerar mais segurança, eficiência e controle.</p>
+        <div class="cta-btns">
+          <a class="btn btn-grad" href="#contato-form" data-cta="especialista">Falar com especialista <svg class="ico"><use href="#i-arrow"/></svg></a>
+          <a class="btn btn-ghost" href="#produtos">Conhecer produtos</a>
+        </div>
+        <ul class="cta-points">
+          <li><span class="ind-ico"><svg class="ico"><use href="#i-msg"/></svg></span>Conversa com quem conhece a operação logística</li>
+          <li><span class="ind-ico"><svg class="ico"><use href="#i-layers"/></svg></span>Produto, consultoria ou solução sob medida</li>
+        </ul>
+      </div>
+
+      <form class="form reveal" id="contato-form" novalidate data-component="ContactForm" aria-labelledby="form-t">
+        <div class="form-body">
+          <h3 id="form-t">Quero falar com a ELSEM</h3>
+          <p>Preencha os dados e um especialista retorna o contato.</p>
+          <div class="fields">
+            <div class="field"><label for="f-nome">Nome</label><input id="f-nome" name="nome" autocomplete="name" required placeholder="Seu nome"><span class="err" aria-live="polite"></span></div>
+            <div class="field"><label for="f-empresa">Empresa</label><input id="f-empresa" name="empresa" autocomplete="organization" required placeholder="Nome da empresa"><span class="err" aria-live="polite"></span></div>
+            <div class="field"><label for="f-email">E-mail corporativo</label><input id="f-email" name="email" type="email" autocomplete="email" required placeholder="voce@empresa.com.br"><span class="err" aria-live="polite"></span></div>
+            <div class="field"><label for="f-tel">Telefone</label><input id="f-tel" name="telefone" type="tel" autocomplete="tel" inputmode="tel" placeholder="(11) 90000-0000"><span class="err" aria-live="polite"></span></div>
+            <div class="field"><label for="f-cargo">Cargo</label><input id="f-cargo" name="cargo" autocomplete="organization-title" placeholder="Ex.: Gerente de riscos"><span class="err" aria-live="polite"></span></div>
+            <div class="field"><label for="f-interesse">Interesse</label><select id="f-interesse" name="interesse" required data-render="interests"><option value="">Selecione</option></select><span class="err" aria-live="polite"></span></div>
+            <div class="field full"><label for="f-msg">Mensagem <span>(opcional)</span></label><textarea id="f-msg" name="mensagem" placeholder="Conte rapidamente o desafio da sua operação"></textarea></div>
+          </div>
+          <button class="btn btn-grad" type="submit">Quero falar com a ELSEM <svg class="ico"><use href="#i-arrow"/></svg></button>
+          <p class="form-foot">Seus dados são usados apenas para retornar este contato.</p>
+        </div>
+        <div class="form-ok" hidden>
+          <div class="ok-ico"><svg class="ico" style="width:28px;height:28px"><use href="#i-check"/></svg></div>
+          <h3>Mensagem registrada.</h3>
+          <p data-ok-text>Obrigado. Um especialista da ELSEM vai retornar o contato.</p>
+          <button class="btn btn-ghost btn-sm" type="button" data-reset>Enviar outra mensagem</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ================= Footer ================= -->
+<footer data-component="Footer">
+  <div class="dark-card footer">
+    <div class="bg bg-glow" style="opacity:.5"></div>
+    <div class="wrap">
+      <div class="foot-grid">
+        <div class="foot-brand">
+          <a class="brand" href="#inicio" aria-label="ELSEM — voltar ao início"><img class="brand-full" src="assets/elsem-logo-full.webp" alt="ELSEM Tecnologia" width="2000" height="667" loading="lazy"></a>
+          <p>Tecnologia que impulsiona operação, segurança e resultados.</p>
+        </div>
+        <div data-render="footer" style="display:contents"></div>
+      </div>
+      <div class="foot-bottom"><span>© <span data-year>2026</span> ELSEM. Todos os direitos reservados.</span><span>Fluxor é um produto desenvolvido pela ELSEM.</span></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* =========================================================
+   CONFIGURAÇÃO — navegação, produtos, recursos, soluções e planos.
+   Altere valores aqui; o restante da página lê deste objeto.
+   ========================================================= */
+const ELSEM_CONFIG = {
+  nav: [
+    { label: 'Produtos', href: '#produtos' },
+    { label: 'Soluções', href: '#solucoes' },
+    { label: 'Recursos', href: '#recursos' },
+    { label: 'Sobre',    href: '#sobre' },
+    { label: 'Contato',  href: '#contato' }
+  ],
+  products: [
+    {
+      id: 'fluxor', status: 'available', name: 'Fluxor', category: 'Plataforma de Gestão de Sinistros',
+      description: 'Centralize e orquestre todo o ciclo de vida dos sinistros em uma única plataforma.',
+      features: ['Fluxos configuráveis','Etapas','Responsáveis','SLA','Tarefas','Documentos','Notificações','Auditoria','Indicadores'],
+      cta: { label: 'Conhecer o Fluxor', href: '#fluxor' }
+    },
+    { id: 'futuro-1', status: 'in-development' },
+    { id: 'futuro-2', status: 'in-development' }
+  ],
+  features: [
+    { icon: 'i-file',   title: 'Gestão de sinistros',   text: 'Registro, classificação e acompanhamento de cada ocorrência em um só lugar.' },
+    { icon: 'i-flow',   title: 'Fluxos configuráveis',  text: 'Etapas, regras e responsáveis desenhados para cada tipo de sinistro.' },
+    { icon: 'i-clock',  title: 'SLA',                   text: 'Prazos por etapa, com alertas antes e depois do vencimento.' },
+    { icon: 'i-task',   title: 'Tarefas',               text: 'Atividades atribuídas por área, com prazo e status visíveis.' },
+    { icon: 'i-zap',    title: 'Automação',             text: 'Notificações, tarefas e avanços de etapa disparados por regra.' },
+    { icon: 'i-layers', title: 'Documentos',            text: 'B.O., notas, laudos e fotos anexados ao sinistro certo.' },
+    { icon: 'i-audit',  title: 'Auditoria',             text: 'Histórico de quem fez o quê, quando e com qual evidência.' },
+    { icon: 'i-chart',  title: 'Indicadores',           text: 'Volume, tempo de ciclo, SLA e gargalos por etapa e área.' },
+    { icon: 'i-plug',   title: 'Integrações',           text: 'Conexão com sistemas da operação, rastreadores e parceiros.' }
+  ],
+  solutions: [
+    { icon: 'i-box',     title: 'Produtos SaaS',          text: 'Soluções próprias e escaláveis.' },
+    { icon: 'i-compass', title: 'Consultoria',            text: 'Diagnóstico, processos, logística e gestão de riscos.' },
+    { icon: 'i-code',    title: 'Soluções tecnológicas',  text: 'Sistemas, integrações e automações.' }
+  ],
+  plans: [
+    { id: 'standard', name: 'Standard', setup: 750, monthly: 349,
+      description: 'Para estruturar a gestão de sinistros com o essencial.',
+      features: ['Registro e acompanhamento de sinistros','Fluxo padrão com etapas e responsáveis','SLA por etapa','Documentos e anexos','Relatórios essenciais','Suporte por e-mail'],
+      cta: 'Começar agora' },
+    { id: 'professional', name: 'Professional', setup: 1650, monthly: 649, featured: true, badge: 'Mais escolhido',
+      description: 'Para operações que precisam de automação e controle por exceção.',
+      features: ['Tudo do Standard','Fluxos configuráveis por tipo de sinistro','Torre de Controle','Automação de tarefas e notificações','Indicadores e auditoria completa','Suporte prioritário'],
+      cta: 'Começar agora' },
+    { id: 'enterprise', name: 'Enterprise', setup: 2300, monthly: 989,
+      description: 'Para estruturas com múltiplas áreas, regras e integrações.',
+      features: ['Tudo do Professional','Campos e regras personalizados','Integrações com sistemas da operação','Perfis e permissões avançados','Acompanhamento dedicado da implantação','Suporte especializado'],
+      cta: 'Falar com especialista' }
+  ],
+  interests: ['Fluxor','Consultoria','Soluções tecnológicas','Outro'],
+  footer: [
+    { title: 'Produtos', links: [{ label: 'Fluxor', href: '#fluxor' }, { label: 'Produtos futuros', href: '#produtos' }] },
+    { title: 'Soluções', links: [{ label: 'SaaS', href: '#produtos' }, { label: 'Consultoria', href: '#solucoes' }, { label: 'Tecnologia', href: '#solucoes' }] },
+    { title: 'Empresa',  links: [{ label: 'Sobre', href: '#sobre' }, { label: 'Contato', href: '#contato' }] },
+    { title: 'Legal',    links: [{ label: 'Privacidade', href: null }, { label: 'Termos de uso', href: null }] }
+  ],
+  contact: { endpoint: null } // URL do backend/CRM que recebe o formulário (POST JSON). null = modo demonstração.
+};
+
+/* ===================== Componentes ===================== */
+(function(){
+  const C = ELSEM_CONFIG;
+  const $ = (s, r=document) => r.querySelector(s);
+  const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));
+  const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const icon = (id, extra='') => `<svg class="ico" ${extra}><use href="#${id}"/></svg>`;
+  const brl = n => new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL',maximumFractionDigits:0}).format(n);
+
+  // Navbar
+  const navItems = C.nav.map(n => `<li><a href="${esc(n.href)}">${esc(n.label)}</a></li>`).join('');
+  $('[data-render="nav"]').innerHTML = navItems;
+  $('[data-render="nav-mobile"]').innerHTML = navItems;
+
+  // Produtos
+  $('[data-render="products"]').innerHTML = C.products.map(p => p.status === 'available' ? `
+    <article class="product reveal">
+      <div class="product-top"><div class="product-logo"><svg class="fx-mark"><use href="#fx"/></svg></div>
+        <div><h3>${esc(p.name)}</h3><p class="cat">${esc(p.category)}</p></div></div>
+      <span class="status live">Disponível</span>
+      <p class="desc">${esc(p.description)}</p>
+      <ul class="tags">${p.features.map(f=>`<li>${esc(f)}</li>`).join('')}</ul>
+      <a class="btn btn-grad" href="${esc(p.cta.href)}">${esc(p.cta.label)} ${icon('i-arrow')}</a>
+    </article>` : `
+    <article class="product future reveal" aria-label="Produto futuro em desenvolvimento">
+      <div class="product-top"><div class="product-logo">${icon('i-sparkle','style="width:24px;height:24px"')}</div>
+        <div><h3 style="color:#64748B">Produto futuro</h3><p class="cat">Novo produto ELSEM</p></div></div>
+      <span class="status">Em desenvolvimento</span>
+      <div class="skel" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+      <button class="btn" type="button" disabled>Em desenvolvimento</button>
+    </article>`).join('');
+
+  // Recursos
+  $('[data-render="features"]').innerHTML = C.features.slice(1).map(f => `
+    <article class="feature reveal"><div class="f-ico">${icon(f.icon)}</div><h3>${esc(f.title)}</h3><p>${esc(f.text)}</p></article>`).join('');
+  // "Gestão de sinistros" (primeiro item) vira o subtítulo da seção; os 8 demais formam a grade 4x2.
+
+  // Soluções
+  $('[data-render="solutions"]').innerHTML = C.solutions.map(s => `
+    <article class="offer-card"><div class="o-ico">${icon(s.icon,'style="width:24px;height:24px"')}</div><div><h3>${esc(s.title)}</h3><p>${esc(s.text)}</p></div></article>`).join('');
+
+  // Planos
+  $('[data-render="plans"]').innerHTML = C.plans.map(p => `
+    <article class="plan${p.featured?' featured':''} reveal">
+      ${p.badge?`<span class="badge">${esc(p.badge)}</span>`:''}
+      <div><h3>${esc(p.name)}</h3><p class="p-desc">${esc(p.description)}</p></div>
+      <div class="price"><span class="main">${brl(p.monthly)}<small>/mês</small></span><span class="setup">Implantação única de <b>${brl(p.setup)}</b></span></div>
+      <ul>${p.features.map(f=>`<li>${icon('i-check')}<span>${esc(f)}</span></li>`).join('')}</ul>
+      <a class="btn ${p.featured?'btn-grad':'btn-soft'}" href="#contato-form" data-plan="${esc(p.name)}">${esc(p.cta)}${p.featured?' '+icon('i-arrow'):''}</a>
+    </article>`).join('');
+
+  // Interesses do formulário
+  $('[data-render="interests"]').insertAdjacentHTML('beforeend', C.interests.map(i=>`<option value="${esc(i)}">${esc(i)}</option>`).join(''));
+
+  // Footer
+  $('[data-render="footer"]').innerHTML = C.footer.map(col => `
+    <div class="foot-col"><h4>${esc(col.title)}</h4><ul>${col.links.map(l => l.href
+      ? `<li><a href="${esc(l.href)}">${esc(l.label)}</a></li>`
+      : `<li><span class="soon">${esc(l.label)}<small>em breve</small></span></li>`).join('')}</ul></div>`).join('');
+  $('[data-year]').textContent = new Date().getFullYear();
+
+  /* Header: sticky com redução de altura + menu mobile */
+  const nav = $('#nav'), toggle = $('.nav-toggle'), menu = $('#mobile-menu');
+  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 24);
+  onScroll(); window.addEventListener('scroll', onScroll, {passive:true});
+  const setMenu = open => { menu.hidden = !open; toggle.setAttribute('aria-expanded', String(open)); toggle.setAttribute('aria-label', open?'Fechar menu':'Abrir menu'); toggle.innerHTML = icon(open?'i-x':'i-menu'); };
+  toggle.addEventListener('click', () => setMenu(menu.hidden));
+  menu.addEventListener('click', e => { if (e.target.closest('a')) setMenu(false); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !menu.hidden) { setMenu(false); toggle.focus(); } });
+  window.matchMedia('(min-width:1025px)').addEventListener('change', e => { if (e.matches) setMenu(false); });
+
+  // Link ativo conforme a seção visível
+  const links = $$('.nav-links a');
+  const targets = C.nav.map(n => $(n.href)).filter(Boolean);
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(entries => entries.forEach(en => {
+      if (en.isIntersecting) links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#'+en.target.id));
+    }), {rootMargin:'-45% 0px -50% 0px'});
+    targets.forEach(t => io.observe(t));
+  }
+
+  /* Abas do Fluxor */
+  const tabs = $$('[role="tab"]');
+  const sideMap = {'pn-dash':'dash','pn-list':'list','pn-detail':'list','pn-flow':'flow'};
+  const select = tab => {
+    tabs.forEach(t => { const on = t === tab; t.setAttribute('aria-selected', on); t.tabIndex = on ? 0 : -1; $('#'+t.getAttribute('aria-controls')).hidden = !on; });
+    const key = sideMap[tab.getAttribute('aria-controls')];
+    $$('.stage .app-nav').forEach(n => n.classList.toggle('on', n.dataset.side === key));
+  };
+  tabs.forEach((t,i) => {
+    t.addEventListener('click', () => select(t));
+    t.addEventListener('keydown', e => {
+      const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+      if (d) { e.preventDefault(); const n = tabs[(i + d + tabs.length) % tabs.length]; select(n); n.focus(); }
+    });
+  });
+  select(tabs[0]);
+
+  /* CTAs que preenchem o formulário */
+  const form = $('#contato-form'), interest = $('#f-interesse'), msg = $('#f-msg');
+  const focusForm = () => setTimeout(() => $('#f-nome').focus({preventScroll:true}), 450);
+  document.addEventListener('click', e => {
+    const a = e.target.closest('a[href^="#contato"]'); if (!a) return;
+    if (a.dataset.plan) { interest.value = 'Fluxor'; if (!msg.value) msg.value = `Tenho interesse no plano ${a.dataset.plan} do Fluxor.`; }
+    else if (a.dataset.interest) interest.value = a.dataset.interest;
+    if (a.dataset.plan || a.dataset.cta || a.dataset.interest) focusForm();
+  });
+
+  /* Formulário: validação e envio */
+  const setErr = (el, text) => { const f = el.closest('.field'); f.classList.toggle('invalid', !!text); f.querySelector('.err').textContent = text || ''; el.setAttribute('aria-invalid', text ? 'true' : 'false'); };
+  const rules = {
+    'f-nome': v => v.trim().length >= 2 || 'Informe seu nome.',
+    'f-empresa': v => v.trim().length >= 2 || 'Informe a empresa.',
+    'f-email': v => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()) || 'Informe um e-mail válido.',
+    'f-interesse': v => !!v || 'Selecione um interesse.'
+  };
+  Object.keys(rules).forEach(id => $('#'+id).addEventListener('blur', e => { const r = rules[id](e.target.value); setErr(e.target, r === true ? '' : r); }));
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    let first = null;
+    Object.entries(rules).forEach(([id, fn]) => { const el = $('#'+id); const r = fn(el.value); setErr(el, r === true ? '' : r); if (r !== true && !first) first = el; });
+    if (first) { first.focus(); return; }
+    const data = Object.fromEntries(new FormData(form));
+    const okText = $('[data-ok-text]');
+    if (C.contact.endpoint) {
+      try {
+        const res = await fetch(C.contact.endpoint, {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(data)});
+        if (!res.ok) throw new Error();
+        okText.textContent = `Obrigado, ${data.nome.split(' ')[0]}. Um especialista da ELSEM vai retornar o contato em ${data.email}.`;
+      } catch { okText.textContent = 'Não foi possível enviar agora. Tente novamente em alguns minutos.'; }
+    } else {
+      okText.textContent = `Obrigado, ${data.nome.split(' ')[0]}. Esta página está em modo de demonstração: o envio será ativado quando o formulário for conectado ao CRM da ELSEM.`;
+    }
+    $('.form-body', form).hidden = true; $('.form-ok', form).hidden = false;
+  });
+  $('[data-reset]', form).addEventListener('click', () => { form.reset(); $('.form-body', form).hidden = false; $('.form-ok', form).hidden = true; $('#f-nome').focus(); });
+})();
+</script>
+
+</body>
+</html>
