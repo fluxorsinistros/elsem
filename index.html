@@ -18,8 +18,10 @@
 <meta property="og:url" content="https://www.elsen.com.br/">
 <meta property="og:image" content="https://www.elsen.com.br/assets/elsem-logo-512.png">
 <meta name="twitter:card" content="summary">
+<script>if(matchMedia('(prefers-reduced-motion: no-preference)').matches)document.documentElement.classList.add('js')</script>
 </head>
 <body>
+<a class="skip-link" href="#inicio">Pular para o conteúdo</a>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@500;600;700;800&display=swap">
@@ -52,6 +54,10 @@ h1,h2,h3,h4{font-family:var(--font-display);margin:0;letter-spacing:-.025em;line
 p{margin:0}
 a{color:inherit}
 :focus-visible{outline:2px solid var(--cyan);outline-offset:3px;border-radius:8px}
+.skip-link{position:absolute;left:16px;top:-60px;z-index:100;padding:10px 16px;border-radius:999px;background:#fff;color:var(--ink);font:600 14px/1 var(--font-body);text-decoration:none;transition:top .2s ease}
+.skip-link:focus{top:16px}
+::selection{background:rgba(37,99,235,.18);color:var(--ink)}
+.on-dark ::selection,.dark-card ::selection{background:rgba(34,211,238,.28);color:#fff}
 [hidden]{display:none!important}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 .wrap{max-width:var(--wrap);margin-inline:auto;padding-inline:24px}
@@ -64,6 +70,7 @@ a{color:inherit}
 .eyebrow.pill{padding:7px 14px 7px 12px;border-radius:999px;background:var(--glass-bg);border:1px solid var(--glass-border);color:#DCE4F2;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
 .grad-text{background:var(--grad);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent}
 .h-sec{font-size:clamp(2rem,3.6vw,3rem);font-weight:700}
+.h-sec .grad-text{background-image:linear-gradient(90deg,#2F6FE0 0%,#4F5BD5 100%)}
 .lead{font-size:1.0625rem;color:var(--ink-2);max-width:56ch}
 .on-dark .lead,.on-dark p{color:var(--muted-dark)}
 .on-dark h2,.on-dark h3{color:var(--white)}
@@ -121,9 +128,9 @@ a{color:inherit}
 .hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.12fr);gap:40px;align-items:center}
 .hero-copy{position:relative;z-index:2;max-width:600px}
 .hero h1{font-size:clamp(2.5rem,4.2vw,3.75rem);font-weight:700;margin:22px 0 22px;letter-spacing:-.035em;line-height:1.04;color:#fff}
-.hero h1 .grad-text{animation:shimmer 8s ease-in-out infinite alternate}
+.hero h1 .grad-text{animation:shimmer 8s ease-in-out 2 alternate both}
 @keyframes shimmer{from{background-position:0 0}to{background-position:100% 0}}
-.hero-sub{font-size:1.0625rem;color:#C2CDE0;max-width:48ch}
+.hero-sub{font-size:1.0625rem;line-height:1.7;letter-spacing:.005em;color:#C2CDE0;max-width:48ch}
 .hero-ctas{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px}
 .hero-ind{display:flex;flex-wrap:wrap;gap:14px 28px;margin:44px 0 0;padding:0;list-style:none}
 .hero-ind li{display:flex;align-items:center;gap:12px;font-size:13.5px;line-height:1.35;color:#C2CDE0;max-width:190px}
@@ -137,6 +144,30 @@ a{color:inherit}
 .chip-float .dot{width:30px;height:30px;border-radius:10px;display:grid;place-items:center;flex:none}
 .hero .chip-a{left:-34px;bottom:58px;animation:float 6s ease-in-out -2s infinite}
 .hero .chip-b{left:34%;top:-26px;animation:float 8s ease-in-out -4s infinite}
+/* Movimento acionado por scroll e mouse. Tudo depende da classe .js (só com movimento permitido), então sem JS o conteúdo fica visível. */
+html.js .blur-up{filter:blur(14px);opacity:0;transform:translateY(26px);transition:filter 1.1s cubic-bezier(.16,1,.3,1),opacity 1s cubic-bezier(.16,1,.3,1),transform 1.1s cubic-bezier(.16,1,.3,1)}
+html.js .blur-up.is-in{filter:blur(0);opacity:1;transform:none}
+/* Barras e linhas começam pausadas e só desenham quando o painel entra na tela */
+html.js .bar i,html.js .draw{animation-play-state:paused}
+html.js .is-in .bar i,html.js .is-in .draw{animation-play-state:running}
+/* Mouse: o mockup acompanha o cursor com um deslocamento sutil */
+[data-tilt] .device{translate:var(--px,0px) var(--py,0px);transition:translate .7s cubic-bezier(.16,1,.3,1)}
+
+/* Dashboard que anda com o scroll: ao sair do hero, a tela "Fluxo por etapa" substitui o dashboard (CSS scroll-driven, fallback: dashboard estático) */
+/* clip-path em vez de overflow:hidden: overflow criaria um scroller e quebraria a view timeline */
+.app{position:relative}
+.screen-2{position:absolute;inset:0;z-index:2;display:grid;grid-template-columns:170px minmax(0,1fr);background:#F4F7FB;color:var(--ink);font-size:12px;line-height:1.4;opacity:0}
+.stage-row{display:grid;grid-template-columns:118px minmax(0,1fr) 26px;align-items:center;gap:10px;font-size:11px;color:var(--ink-2);padding:7px 0}
+.stage-row b{text-align:right;font-variant-numeric:tabular-nums;color:var(--ink)}
+.stage-row.hot span{color:#BE123C;font-weight:600}
+.stage-row.hot .bar i{background:linear-gradient(90deg,#F43F5E,#7C3AED)}
+@supports (animation-timeline: view()){
+  @media (prefers-reduced-motion: no-preference){
+    .screen-2{animation:screen-in linear both;animation-timeline:view();animation-range:exit 10% exit 60%}
+  }
+}
+@keyframes screen-in{from{opacity:0}to{opacity:1}}
+
 /* Momento focal: o mockup do Fluxor entra saindo de profundidade e se assenta na posição final;
    os chips de status entram por último. Só anima o que é visível no estado final, sem esconder conteúdo. */
 @keyframes device-in{from{opacity:0;filter:blur(14px);transform:rotateY(18deg) rotateX(4deg) rotateZ(-3deg) translate3d(90px,70px,-180px)}}
@@ -148,13 +179,13 @@ a{color:inherit}
 }
 
 /* ---------- Mockup de app (ProductMockup) ---------- */
-.device{position:relative;padding:12px;border-radius:26px;background:linear-gradient(160deg,#1C2850,#0B1220 55%);border:1px solid rgba(255,255,255,.14);box-shadow:var(--shadow-deep),0 0 0 1px rgba(34,211,238,.06),0 0 60px -10px rgba(37,99,235,.45)}
+.device{position:relative;padding:12px;border-radius:26px;background:linear-gradient(160deg,#1C2850,#0B1220 55%);border:1px solid rgba(255,255,255,.14);box-shadow:var(--shadow-deep),0 0 0 1px rgba(34,211,238,.06),0 0 60px -14px rgba(37,99,235,.22)}
 .device::before{content:"";position:absolute;inset:-1px;border-radius:inherit;padding:1px;background:linear-gradient(130deg,rgba(34,211,238,.6),rgba(37,99,235,.1) 40%,rgba(124,58,237,.6));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
-.app{display:grid;grid-template-columns:170px minmax(0,1fr);border-radius:16px;overflow:hidden;background:#F4F7FB;color:var(--ink);font-size:12px;line-height:1.4;min-height:430px}
+.app{display:grid;grid-template-columns:170px minmax(0,1fr);border-radius:16px;clip-path:inset(0 round 16px);background:#F4F7FB;color:var(--ink);font-size:12px;line-height:1.4;min-height:430px}
 .app-side{background:var(--navy);color:#B7C3D9;padding:16px 12px;display:flex;flex-direction:column;gap:4px}
 .app-brand{display:flex;align-items:center;gap:8px;padding:2px 6px 14px;color:#fff;font:700 15px/1 var(--font-display)}
 .app-brand small{display:block;font:500 9.5px/1.2 var(--font-body);color:#7F8DA8;letter-spacing:.02em;margin-top:3px}
-.fx-mark{width:28px;height:28px;flex:none}
+.fx-mark{width:28px;height:28px;flex:none;object-fit:contain}
 .app-nav{display:flex;align-items:center;gap:9px;padding:8px 9px;border-radius:9px;font-size:11.5px;font-weight:500}
 .app-nav .ico{width:15px;height:15px}
 .app-nav.on{background:linear-gradient(90deg,rgba(37,99,235,.9),rgba(124,58,237,.75));color:#fff;box-shadow:0 6px 16px -8px rgba(124,58,237,.9)}
@@ -218,8 +249,10 @@ a{color:inherit}
 .eco-list .ico{width:24px;height:24px;color:var(--blue)}
 
 /* ---------- Seções claras ---------- */
-.sec{padding:96px 0;position:relative}
-.sec-tight{padding:72px 0}
+/* Ritmo vertical: a distância entre seções é a soma do padding de baixo + o de cima (120px no desktop).
+   .sec-tight é intencionalmente mais compacta para criar contraste de ritmo. */
+.sec{padding:60px 0;position:relative}
+.sec-tight{padding:40px 0}
 .sec-head{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:24px 56px;align-items:end;margin-bottom:48px}
 .sec-head h2{margin-top:14px}
 .sec-head .side{display:grid;gap:20px;justify-items:start}
@@ -279,7 +312,7 @@ a{color:inherit}
 .fluxor-head h2 span{display:block}
 .fluxor-head .side{display:grid;gap:22px;justify-items:start}
 .tabs{display:flex;flex-wrap:wrap;gap:6px;margin:48px 0 22px;padding:6px;border-radius:999px;background:var(--glass-bg);border:1px solid var(--glass-border);width:max-content;max-width:100%}
-.tab{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 16px;border-radius:999px;border:0;background:transparent;color:#B9C5DA;font:500 14px/1 var(--font-body);cursor:pointer;transition:background-color .2s,color .2s}
+.tab{display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 16px;border-radius:999px;border:0;background:transparent;color:#B9C5DA;font:500 14px/1 var(--font-body);cursor:pointer;transition:background-color .2s,color .2s}
 .tab .ico{width:16px;height:16px}
 .tab:hover{color:#fff}
 .tab[aria-selected="true"]{background:var(--grad-btn);color:#fff;box-shadow:0 8px 20px -10px rgba(124,58,237,.9)}
@@ -347,7 +380,7 @@ a{color:inherit}
 .tower{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:56px;align-items:center}
 .tower h2 span{display:block}
 .tower .tag-exc{display:inline-flex;align-items:center;gap:8px;margin-top:22px;padding:8px 14px;border-radius:12px;background:#0B1220;color:#fff;font:600 12.5px/1 var(--font-body);letter-spacing:.08em;text-transform:uppercase}
-.tower .tag-exc i{width:8px;height:8px;border-radius:50%;background:var(--rose);box-shadow:0 0 0 4px rgba(244,63,94,.25);animation:pulse 2s ease-in-out infinite}
+.tower .tag-exc i{width:8px;height:8px;border-radius:50%;background:var(--rose);box-shadow:0 0 0 4px rgba(244,63,94,.25);animation:pulse 2s ease-in-out 3}
 @keyframes pulse{50%{box-shadow:0 0 0 8px rgba(244,63,94,0)}}
 .tower .lead{margin-top:18px}
 .watch{list-style:none;margin:28px 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 18px}
@@ -359,7 +392,7 @@ a{color:inherit}
 .ctl-top h3{font:700 15px/1.2 var(--font-display);color:#fff;letter-spacing:-.01em}
 .ctl-top span{font-size:11.5px;color:var(--muted-dark)}
 .live{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:#A5F3FC;font-weight:600}
-.live::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--cyan);animation:pulse-c 2s infinite}
+.live::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--cyan);animation:pulse-c 2s 3}
 @keyframes pulse-c{0%{box-shadow:0 0 0 0 rgba(34,211,238,.6)}70%{box-shadow:0 0 0 8px rgba(34,211,238,0)}}
 .ctl-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
 .ctl-kpi{padding:12px;border-radius:14px;background:var(--glass-bg);border:1px solid var(--glass-border);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
@@ -433,8 +466,8 @@ a{color:inherit}
 @media (max-width:640px){.trust{grid-template-columns:minmax(0,1fr)}}
 .benefit .b-ico{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:var(--grad-btn);color:#fff;margin-bottom:6px}
 .benefit:nth-child(even) .b-ico{background:linear-gradient(135deg,#22D3EE,#2563EB)}
-.benefit h3{font-size:1rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
-.benefit p{color:var(--ink-2);font-size:.95rem}
+.benefit h3{font-size:1.125rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.benefit p{color:var(--ink-2);font-size:1rem;line-height:1.55}
 
 /* ---------- Planos (Pricing) ---------- */
 .pricing-head{text-align:center;margin-bottom:44px;display:grid;justify-items:center;gap:12px}
@@ -493,6 +526,16 @@ a{color:inherit}
 .form-ok{display:grid;justify-items:center;text-align:center;gap:12px;padding:30px 10px}
 .form-ok .ok-ico{width:60px;height:60px;border-radius:50%;display:grid;place-items:center;background:var(--grad-btn);color:#fff}
 .form-ok h3{color:#fff}
+/* Confirmação com a mesma linguagem do Fluxor: o chip de status do hero aparece quando o contato entra na fila */
+.form-ok .ok-ico{position:relative}
+.form-ok .ok-chip{position:relative;margin-top:4px}
+@keyframes ok-pop{from{opacity:0;scale:.6}}
+@keyframes ring-out{from{box-shadow:0 0 0 0 rgba(34,211,238,.55)}to{box-shadow:0 0 0 26px rgba(34,211,238,0)}}
+@media (prefers-reduced-motion: no-preference){
+  .form-ok:not([hidden]) .ok-ico{animation:ok-pop .6s cubic-bezier(.16,1,.3,1) both}
+  .form-ok:not([hidden]) .ok-ico::after{content:"";position:absolute;inset:0;border-radius:50%;animation:ring-out 1.1s ease-out .15s both;pointer-events:none}
+  .form-ok:not([hidden]) .ok-chip{animation:chip-in .7s cubic-bezier(.16,1,.3,1) .35s both}
+}
 .form-ok p{color:var(--muted-dark);max-width:40ch}
 
 /* ---------- Footer ---------- */
@@ -560,6 +603,7 @@ a{color:inherit}
   .step h3{margin-top:14px}
   .stage .app,.app{grid-template-columns:minmax(0,1fr)}
   .app-side{display:none}
+  .screen-2{grid-template-columns:minmax(0,1fr)}
   .rules{grid-template-columns:minmax(0,1fr)}
 }
 @media (max-width:640px){
@@ -579,8 +623,8 @@ a{color:inherit}
   .app-grid,.detail-grid{grid-template-columns:minmax(0,1fr)}
   .app-grid .panel.recent{display:none}
   .app-search span{overflow:hidden;text-overflow:ellipsis}
-  .sec{padding:72px 0}
-  .sec-tight{padding:56px 0}
+  .sec{padding:40px 0}
+  .sec-tight{padding:28px 0}
   .eco-list{grid-template-columns:repeat(2,minmax(0,1fr))}
   .eco-list li{justify-content:flex-start}
   .pillars,.features,.benefits{grid-template-columns:minmax(0,1fr)}
@@ -614,7 +658,6 @@ a{color:inherit}
     <linearGradient id="g-area" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2563EB" stop-opacity=".28"/><stop offset="1" stop-color="#7C3AED" stop-opacity="0"/></linearGradient>
   </defs>
   <!-- Identidade provisória do Fluxor: três nós conectados em fluxo -->
-  <symbol id="fx" viewBox="0 0 40 40"><rect width="40" height="40" rx="12" fill="url(#g-fx)"/><path d="M11 12.5h9.5c4.2 0 4.2 7.5 8.5 7.5M11 27.5h9.5c4.2 0 4.2-7.5 8.5-7.5" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/><circle cx="11" cy="12.5" r="3" fill="#fff"/><circle cx="11" cy="27.5" r="3" fill="#fff"/><circle cx="29.5" cy="20" r="3.6" fill="#fff"/></symbol>
   <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
   <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 4.5 6v5.5c0 4.6 3.2 8.4 7.5 9.5 4.3-1.1 7.5-4.9 7.5-9.5V6L12 3Z"/><path d="m9 12 2 2 4-4"/></symbol>
   <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1Z"/></symbol>
@@ -697,13 +740,45 @@ a{color:inherit}
         </ul>
       </div>
 
-      <div class="hero-visual" data-component="ProductMockup">
+      <div class="hero-visual" data-component="ProductMockup" data-tilt>
         <div class="chip-float chip-b"><span class="dot" style="background:rgba(34,211,238,.16);color:#22D3EE"><svg class="ico" style="width:16px;height:16px"><use href="#i-check-sq"/></svg></span><span><b>Aprovação concluída</b>Jurídico · SN-1279</span></div>
         <div class="float">
           <div class="device" role="img" aria-label="Tela ilustrativa do dashboard do Fluxor com indicadores de sinistros, gráfico de evolução, distribuição por tipo e sinistros recentes">
             <div class="app" aria-hidden="true">
+              <div class="screen-2">
+                <aside class="app-side">
+                  <div class="app-brand"><img class="fx-mark" src="assets/fluxor-logo.webp" alt="" width="320" height="314" decoding="async"><span>Fluxor<small>por ELSEM</small></span></div>
+                  <div class="app-nav"><svg class="ico"><use href="#i-home"/></svg>Dashboard</div>
+                  <div class="app-nav"><svg class="ico"><use href="#i-file"/></svg>Sinistros</div>
+                  <div class="app-nav"><svg class="ico"><use href="#i-radar"/></svg>Torre de Controle<span class="cnt">5</span></div>
+                  <div class="app-nav on"><svg class="ico"><use href="#i-flow"/></svg>Fluxos</div>
+                  <div class="app-nav"><svg class="ico"><use href="#i-task"/></svg>Tarefas</div>
+                  <div class="app-nav"><svg class="ico"><use href="#i-chart"/></svg>Relatórios</div>
+                </aside>
+                <div class="app-main">
+                  <div class="app-top">
+                    <div class="app-search"><svg class="ico"><use href="#i-search"/></svg><span>Buscar sinistro, placa, responsável…</span></div>
+                    <div class="avatar">OP</div>
+                  </div>
+                  <div class="app-head"><div><h4>Fluxo por etapa</h4><span>Sinistros em andamento agora</span></div><span class="demo-tag">Dados ilustrativos</span></div>
+                  <div class="panel stages">
+                    <div class="stage-row"><span>Registro</span><div class="bar"><i style="width:42%"></i></div><b>24</b></div>
+                    <div class="stage-row"><span>Análise</span><div class="bar"><i style="width:56%"></i></div><b>18</b></div>
+                    <div class="stage-row hot"><span>Aprovação jurídica</span><div class="bar"><i style="width:100%"></i></div><b>31</b></div>
+                    <div class="stage-row"><span>Pagamento</span><div class="bar"><i style="width:30%"></i></div><b>12</b></div>
+                    <div class="stage-row"><span>Auditoria</span><div class="bar"><i style="width:22%"></i></div><b>9</b></div>
+                  </div>
+                  <div class="panel recent">
+                    <div class="panel-h"><b>Gargalo identificado</b><span>SLA</span></div>
+                    <div class="list">
+                      <div class="li"><i class="sev" style="background:#F43F5E"></i><span><b>Aprovação jurídica</b> <em>31 parados</em></span><span class="sla late">Crítico</span></div>
+                      <div class="li"><i class="sev" style="background:#7C3AED"></i><span><b>Análise</b> <em>18 em fila</em></span><span class="sla mid">Atenção</span></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
               <aside class="app-side">
-                <div class="app-brand"><svg class="fx-mark"><use href="#fx"/></svg><span>Fluxor<small>por ELSEM</small></span></div>
+                <div class="app-brand"><img class="fx-mark" src="assets/fluxor-logo.webp" alt="" width="320" height="314" decoding="async"><span>Fluxor<small>por ELSEM</small></span></div>
                 <div class="app-nav on"><svg class="ico"><use href="#i-home"/></svg>Dashboard</div>
                 <div class="app-nav"><svg class="ico"><use href="#i-file"/></svg>Sinistros</div>
                 <div class="app-nav"><svg class="ico"><use href="#i-radar"/></svg>Torre de Controle<span class="cnt">5</span></div>
@@ -803,7 +878,7 @@ a{color:inherit}
 </section>
 
 <!-- ================= Produtos ================= -->
-<section class="sec" id="produtos" aria-labelledby="prod-t" style="padding-top:24px" data-component="ProductsSection">
+<section class="sec" id="produtos" aria-labelledby="prod-t" data-component="ProductsSection">
   <div class="wrap">
     <div class="sec-head reveal">
       <div><span class="eyebrow">Produtos ELSEM</span><h2 class="h-sec" id="prod-t">Produtos que transformam processos em <span class="grad-text">resultados.</span></h2></div>
@@ -820,7 +895,7 @@ a{color:inherit}
     <div class="wrap">
       <div class="fluxor-head reveal">
         <div>
-          <div class="fx-id"><svg class="fx-mark"><use href="#fx"/></svg><span><b>Fluxor</b><small>Um produto ELSEM · Gestão de Sinistros</small></span></div>
+          <div class="fx-id"><img class="fx-mark" src="assets/fluxor-logo.webp" alt="" width="320" height="314" decoding="async"><span><b>Fluxor</b><small>Um produto ELSEM · Gestão de Sinistros</small></span></div>
           <h2 id="fx-t"><span>Do evento à resolução.</span><span class="grad-text">Tudo em fluxo.</span></h2>
         </div>
         <div class="side">
@@ -836,13 +911,13 @@ a{color:inherit}
         <button class="tab" role="tab" id="tab-flow" aria-controls="pn-flow" aria-selected="false" tabindex="-1"><svg class="ico"><use href="#i-flow"/></svg>Fluxos</button>
       </div>
 
-      <div class="stage reveal">
+      <div class="stage reveal" data-tilt>
         <div class="chip-float chip-c"><span class="dot" style="background:rgba(124,58,237,.2);color:#C4B5FD"><svg class="ico" style="width:16px;height:16px"><use href="#i-file"/></svg></span><span><b>Laudo de vistoria anexado</b>SN-1284 · há 12 min</span></div>
         <div class="chip-float chip-d"><span class="dot" style="background:rgba(34,211,238,.16);color:#22D3EE"><svg class="ico" style="width:16px;height:16px"><use href="#i-zap"/></svg></span><span><b>Tarefa criada automaticamente</b>Regra: roubo → notificar gerenciadora</span></div>
         <div class="device">
           <div class="app">
             <aside class="app-side" aria-hidden="true">
-              <div class="app-brand"><svg class="fx-mark"><use href="#fx"/></svg><span>Fluxor<small>por ELSEM</small></span></div>
+              <div class="app-brand"><img class="fx-mark" src="assets/fluxor-logo.webp" alt="" width="320" height="314" decoding="async"><span>Fluxor<small>por ELSEM</small></span></div>
               <div class="app-nav" data-side="dash"><svg class="ico"><use href="#i-home"/></svg>Dashboard</div>
               <div class="app-nav" data-side="list"><svg class="ico"><use href="#i-file"/></svg>Sinistros</div>
               <div class="app-nav"><svg class="ico"><use href="#i-radar"/></svg>Torre de Controle<span class="cnt">5</span></div>
@@ -1048,7 +1123,7 @@ a{color:inherit}
 </section>
 
 <!-- ================= Recursos ================= -->
-<section class="sec" id="recursos" aria-labelledby="rec-t" style="padding-top:48px" data-component="Features">
+<section class="sec" id="recursos" aria-labelledby="rec-t" data-component="Features">
   <div class="wrap">
     <div class="sec-head reveal">
       <div><span class="eyebrow">Recursos do Fluxor</span><h2 class="h-sec" id="rec-t">Gestão de sinistros, ponta a ponta.</h2></div>
@@ -1059,7 +1134,7 @@ a{color:inherit}
 </section>
 
 <!-- ================= Além do software ================= -->
-<section class="sec" id="solucoes" aria-labelledby="sol-t" style="padding-top:24px" data-component="Solutions">
+<section class="sec" id="solucoes" aria-labelledby="sol-t" data-component="Solutions">
   <div class="blobs"></div>
   <div class="wrap">
     <div class="beyond reveal">
@@ -1110,7 +1185,7 @@ a{color:inherit}
 </section>
 
 <!-- ================= Dados e segurança ================= -->
-<section class="sec" id="seguranca" aria-labelledby="seg-t" style="padding-top:24px" data-component="Security">
+<section class="sec" id="seguranca" aria-labelledby="seg-t" data-component="Security">
   <div class="wrap">
     <div class="pricing-head reveal"><span class="eyebrow">Dados e segurança</span><h2 class="h-sec" id="seg-t" style="max-width:22ch">Seus dados protegidos na base.<span class="grad-text"> Acesso só para quem deve ver.</span></h2></div>
     <div class="trust">
@@ -1121,7 +1196,7 @@ a{color:inherit}
 </section>
 
 <!-- ================= Planos ================= -->
-<section class="sec" id="planos" aria-labelledby="plan-t" style="padding-top:24px" data-component="Pricing">
+<section class="sec" id="planos" aria-labelledby="plan-t" data-component="Pricing">
   <div class="blobs"></div>
   <div class="wrap">
     <div class="pricing-head reveal"><span class="eyebrow">Planos do Fluxor</span><h2 class="h-sec" id="plan-t" style="max-width:22ch">Escolha o nível de estrutura para sua operação.</h2><p>Implantação única e mensalidade fixa. Sem surpresa no contrato.</p></div>
@@ -1168,6 +1243,7 @@ a{color:inherit}
         <div class="form-ok" hidden>
           <div class="ok-ico"><svg class="ico" style="width:28px;height:28px"><use href="#i-check"/></svg></div>
           <h3>Mensagem registrada.</h3>
+          <div class="chip-float ok-chip"><span class="dot" style="background:rgba(34,211,238,.16);color:#22D3EE"><svg class="ico" style="width:16px;height:16px"><use href="#i-check-sq"/></svg></span><span><b>Na fila de atendimento</b>Especialista ELSEM</span></div>
           <p data-ok-text>Obrigado. Um especialista da ELSEM vai retornar o contato.</p>
           <button class="btn btn-ghost btn-sm" type="button" data-reset>Enviar outra mensagem</button>
         </div>
@@ -1212,7 +1288,7 @@ const ELSEM_CONFIG = {
       id: 'fluxor', status: 'available', name: 'Fluxor', category: 'Plataforma de Gestão de Sinistros',
       description: 'Centralize e orquestre todo o ciclo de vida dos sinistros em uma única plataforma.',
       features: ['Fluxos configuráveis','Etapas','Responsáveis','SLA','Tarefas','Documentos','Notificações','Auditoria','Indicadores'],
-      cta: { label: 'Conhecer o Fluxor', href: '#fluxor' }
+      cta: { label: 'Conhecer o Fluxor', href: 'https://fluxor.elsem.com.br/' }
     },
     { id: 'futuro-1', status: 'in-development' },
     { id: 'futuro-2', status: 'in-development' }
@@ -1249,7 +1325,7 @@ const ELSEM_CONFIG = {
   ],
   interests: ['Fluxor','Consultoria','Soluções tecnológicas','Outro'],
   footer: [
-    { title: 'Produtos', links: [{ label: 'Fluxor', href: '#fluxor' }, { label: 'Produtos futuros', href: '#produtos' }] },
+    { title: 'Produtos', links: [{ label: 'Fluxor', href: 'https://fluxor.elsem.com.br/' }, { label: 'Produtos futuros', href: '#produtos' }] },
     { title: 'Soluções', links: [{ label: 'SaaS', href: '#produtos' }, { label: 'Consultoria', href: '#solucoes' }, { label: 'Tecnologia', href: '#solucoes' }] },
     { title: 'Empresa',  links: [{ label: 'Sobre', href: '#sobre' }, { label: 'Contato', href: '#contato' }] },
     { title: 'Legal',    links: [{ label: 'Privacidade', href: null }, { label: 'Termos de uso', href: null }] }
@@ -1274,7 +1350,7 @@ const ELSEM_CONFIG = {
   // Produtos
   $('[data-render="products"]').innerHTML = C.products.map(p => p.status === 'available' ? `
     <article class="product reveal">
-      <div class="product-top"><div class="product-logo"><svg class="fx-mark"><use href="#fx"/></svg></div>
+      <div class="product-top"><div class="product-logo"><img class="fx-mark" src="assets/fluxor-logo.webp" alt="" width="320" height="314" decoding="async"></div>
         <div><h3>${esc(p.name)}</h3><p class="cat">${esc(p.category)}</p></div></div>
       <span class="status live">Disponível</span>
       <p class="desc">${esc(p.description)}</p>
@@ -1357,6 +1433,7 @@ const ELSEM_CONFIG = {
 
   /* CTAs que preenchem o formulário */
   const form = $('#contato-form'), interest = $('#f-interesse'), msg = $('#f-msg');
+  const submitBtn = $('button[type="submit"]', form);
   const focusForm = () => setTimeout(() => $('#f-nome').focus({preventScroll:true}), 450);
   document.addEventListener('click', e => {
     const a = e.target.closest('a[href^="#contato"]'); if (!a) return;
@@ -1382,17 +1459,68 @@ const ELSEM_CONFIG = {
     const data = Object.fromEntries(new FormData(form));
     const okText = $('[data-ok-text]');
     if (C.contact.endpoint) {
+      submitBtn.disabled = true; submitBtn.setAttribute('aria-busy', 'true');
       try {
         const res = await fetch(C.contact.endpoint, {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(data)});
         if (!res.ok) throw new Error();
         okText.textContent = `Obrigado, ${data.nome.split(' ')[0]}. Um especialista da ELSEM vai retornar o contato em ${data.email}.`;
       } catch { okText.textContent = 'Não foi possível enviar agora. Tente novamente em alguns minutos.'; }
+      finally { submitBtn.disabled = false; submitBtn.removeAttribute('aria-busy'); }
     } else {
       okText.textContent = `Obrigado, ${data.nome.split(' ')[0]}. Esta página está em modo de demonstração: o envio será ativado quando o formulário for conectado ao CRM da ELSEM.`;
     }
     $('.form-body', form).hidden = true; $('.form-ok', form).hidden = false;
   });
   $('[data-reset]', form).addEventListener('click', () => { form.reset(); $('.form-body', form).hidden = false; $('.form-ok', form).hidden = true; $('#f-nome').focus(); });
+})();
+
+/* Movimento de entrada: texto com blur, barras e linhas, números contando e mouse nos mockups */
+(() => {
+  if (!document.documentElement.classList.contains('js')) return;
+  const countSel = '.kpi b, .ctl-kpi b, .type-row b, .stage-row b';
+  const io = new IntersectionObserver(entries => entries.forEach(en => {
+    if (!en.isIntersecting) return;
+    const el = en.target;
+    el.classList.add('is-in');
+    if (el.matches(countSel)) countUp(el);
+    io.unobserve(el);
+  }), { threshold: .2, rootMargin: '0px 0px -6% 0px' });
+
+  const countUp = el => {
+    const target = parseInt(el.dataset.count, 10);
+    if (isNaN(target)) return;
+    const dur = 1200, t0 = performance.now();
+    const step = now => {
+      const t = Math.min(1, (now - t0) / dur), eased = 1 - Math.pow(1 - t, 3);
+      el.textContent = Math.round(target * eased);
+      if (t < 1) requestAnimationFrame(step);
+    };
+    el.textContent = '0';
+    requestAnimationFrame(step);
+  };
+
+  document.querySelectorAll(countSel).forEach(el => {
+    el.dataset.count = el.textContent.trim();
+    el.textContent = '0';
+    io.observe(el);
+  });
+  document.querySelectorAll('.device, .ctl, .panel, .kpis, .types, .stages, .ctl-kpis, .list, .app-grid').forEach(el => io.observe(el));
+  document.querySelectorAll('.hero h1, .hero-sub, .hero .eyebrow, section h2, section .lead, section .eyebrow, .sec-head p, .pricing-head p').forEach(el => {
+    el.classList.add('blur-up');
+    io.observe(el);
+  });
+
+  document.querySelectorAll('[data-tilt]').forEach(zone => {
+    zone.addEventListener('pointermove', e => {
+      const r = zone.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
+      zone.style.setProperty('--px', (x * -18).toFixed(1) + 'px');
+      zone.style.setProperty('--py', (y * -12).toFixed(1) + 'px');
+    });
+    zone.addEventListener('pointerleave', () => {
+      zone.style.setProperty('--px', '0px'); zone.style.setProperty('--py', '0px');
+    });
+  });
 })();
 </script>
 
