@@ -342,7 +342,7 @@ html.js .is-in .bar i,html.js .is-in .draw{animation-play-state:running}
 .pillar p{color:var(--ink-2);font-size:.95rem;margin-top:6px}
 
 /* Produtos */
-.products{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.products{display:grid;grid-template-columns:minmax(0,460px);gap:20px}
 .product{display:flex;flex-direction:column;gap:20px;padding:28px;border-radius:var(--r-lg);background:rgba(255,255,255,.78);border:1px solid #fff;box-shadow:var(--shadow-soft);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);transition:transform .3s ease, box-shadow .3s ease}
 .product:hover{transform:translateY(-4px);box-shadow:0 30px 60px -28px rgba(37,99,235,.35)}
 .product-top{display:flex;align-items:center;gap:16px}
@@ -1322,8 +1322,10 @@ html.js .is-in .bar i,html.js .is-in .draw{animation-play-state:running}
   <div class="wrap">
     <div class="pricing-head reveal"><span class="eyebrow">Dados e segurança</span><h2 class="h-sec" id="seg-t" style="max-width:22ch">Seus dados ficam protegidos na base.<span class="grad-text"> Cada pessoa vê só o que lhe cabe.</span></h2></div>
     <div class="trust">
-      <article class="benefit reveal"><div class="b-ico"><svg class="ico"><use href="#i-lock"/></svg></div><h3>Row Level Security</h3><p>A regra de acesso fica no próprio banco de dados, e cada usuário vê só os registros que tem permissão.</p></article>
-      <article class="benefit reveal"><div class="b-ico"><svg class="ico"><use href="#i-db"/></svg></div><h3>Base Supabase</h3><p>Dados armazenados em Postgres gerenciado pela Supabase.</p></article>
+      <article class="benefit reveal"><div class="b-ico"><svg class="ico"><use href="#i-lock"/></svg></div><h3>Criptografia</h3><p>Os dados trafegam por conexão segura e ficam armazenados criptografados. O banco usa AES-256 em repouso e TLS em trânsito.</p></article>
+      <article class="benefit reveal"><div class="b-ico"><svg class="ico"><use href="#i-shield"/></svg></div><h3>Acesso por linha</h3><p>A regra de acesso fica no próprio banco de dados. Cada usuário vê apenas os registros que tem permissão de ver.</p></article>
+      <article class="benefit reveal"><div class="b-ico"><svg class="ico"><use href="#i-radar"/></svg></div><h3>Infraestrutura protegida</h3><p>Hospedagem com firewall e mitigação de ataques DDoS. Vercel e Supabase seguem SOC 2 Tipo 2.</p></article>
+      <article class="benefit reveal"><div class="b-ico"><svg class="ico"><use href="#i-check-sq"/></svg></div><h3>Formulário protegido</h3><p>Verificação anti-robô com hCaptcha e limite de envios por endereço. As chaves de acesso ficam guardadas fora do código.</p></article>
     </div>
   </div>
 </section>
@@ -1461,7 +1463,7 @@ const ELSEM_CONFIG = {
   ],
   interests: ['Fluxor','Consultoria','Soluções tecnológicas','Outro'],
   footer: [
-    { title: 'Produtos', links: [{ label: 'Fluxor', href: '#fluxor' }, { label: 'Produtos futuros', href: '#produtos' }] },
+    { title: 'Produtos', links: [{ label: 'Fluxor', href: '#fluxor' }] },
     { title: 'Soluções', links: [{ label: 'SaaS', href: '#produtos' }, { label: 'Consultoria', href: '#solucoes' }, { label: 'Tecnologia', href: '#solucoes' }] },
     { title: 'Empresa',  links: [{ label: 'Sobre', href: '#sobre' }, { label: 'Contato', href: '#contato' }] },
     { title: 'Legal',    links: [{ label: 'Privacidade', href: null }, { label: 'Termos de uso', href: null }] }
@@ -1484,7 +1486,8 @@ const ELSEM_CONFIG = {
   $('[data-render="nav-mobile"]').innerHTML = navItems;
 
   // Produtos
-  $('[data-render="products"]').innerHTML = C.products.map(p => p.status === 'available' ? `
+  // Só produtos disponíveis aparecem. Para exibir um futuro produto, ajuste o status em C.products.
+  $('[data-render="products"]').innerHTML = C.products.filter(p => p.status === 'available').map(p => p.status === 'available' ? `
     <article class="product reveal">
       <div class="product-top"><div class="product-logo"><img class="fx-mark" src="assets/fluxor-logo.webp" alt="" width="320" height="314" decoding="async"></div>
         <div><h3>${esc(p.name)}</h3><p class="cat">${esc(p.category)}</p></div></div>
