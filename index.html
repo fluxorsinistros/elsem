@@ -900,9 +900,7 @@ html.js .is-in .bar i,html.js .is-in .draw{animation-play-state:running}
         </div>
         <div class="side">
           <p class="lead">O Fluxor organiza e orquestra o ciclo de vida dos sinistros, conectando pessoas, processos, documentos, responsabilidades e SLAs em um único ambiente.</p>
-          <a class="btn btn-grad" href="#contato" data-interest="Fluxor">Solicitar demonstração <svg class="ico"><use href="#i-arrow"/></svg></a>
-          <a class="btn btn-ghost" href="https://fluxor.elsem.com.br/">Acessar o Fluxor</a>
-        </div>
+          <a class="btn btn-grad" href="#contato" data-interest="Fluxor">Solicitar demonstração <svg class="ico"><use href="#i-arrow"/></svg></a>        </div>
       </div>
 
       <div class="tabs" role="tablist" aria-label="Telas do Fluxor">
@@ -1289,7 +1287,7 @@ const ELSEM_CONFIG = {
       id: 'fluxor', status: 'available', name: 'Fluxor', category: 'Plataforma de Gestão de Sinistros',
       description: 'Centralize e orquestre todo o ciclo de vida dos sinistros em uma única plataforma.',
       features: ['Fluxos configuráveis','Etapas','Responsáveis','SLA','Tarefas','Documentos','Notificações','Auditoria','Indicadores'],
-      cta: { label: 'Conhecer o Fluxor', href: 'https://fluxor.elsem.com.br/' }
+      cta: { label: 'Conhecer o Fluxor', href: '#fluxor' }
     },
     { id: 'futuro-1', status: 'in-development' },
     { id: 'futuro-2', status: 'in-development' }
@@ -1326,12 +1324,12 @@ const ELSEM_CONFIG = {
   ],
   interests: ['Fluxor','Consultoria','Soluções tecnológicas','Outro'],
   footer: [
-    { title: 'Produtos', links: [{ label: 'Fluxor', href: 'https://fluxor.elsem.com.br/' }, { label: 'Produtos futuros', href: '#produtos' }] },
+    { title: 'Produtos', links: [{ label: 'Fluxor', href: '#fluxor' }, { label: 'Produtos futuros', href: '#produtos' }] },
     { title: 'Soluções', links: [{ label: 'SaaS', href: '#produtos' }, { label: 'Consultoria', href: '#solucoes' }, { label: 'Tecnologia', href: '#solucoes' }] },
     { title: 'Empresa',  links: [{ label: 'Sobre', href: '#sobre' }, { label: 'Contato', href: '#contato' }] },
     { title: 'Legal',    links: [{ label: 'Privacidade', href: null }, { label: 'Termos de uso', href: null }] }
   ],
-  contact: { endpoint: null } // URL do backend/CRM que recebe o formulário (POST JSON). null = modo demonstração.
+  contact: { endpoint: 'https://encznumhzmvyutrrpdyl.supabase.co/functions/v1/contato' } // URL do backend/CRM que recebe o formulário (POST JSON). null = modo demonstração.
 };
 
 /* ===================== Componentes ===================== */
