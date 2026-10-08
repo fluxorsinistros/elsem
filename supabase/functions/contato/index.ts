@@ -20,13 +20,44 @@ const json = (status: number, body: unknown, origin: string | null) =>
 const esc = (s: string) =>
   s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]!));
 
+// Limite por IP: no máximo 3 envios a cada 10 minutos (memória desta instância).
+const hits = new Map<string, number[]>();
+const WINDOW_MS = 10 * 60 * 1000;
+const LIMIT = 3;
+const clientIp = (req: Request) =>
+  (req.headers.get("cf-connecting-ip") ?? req.headers.get("x-forwarded-for") ?? "unknown").split(",")[0].trim();
+const overLimit = (ip: string) => {
+  const now = Date.now();
+  const recent = (hits.get(ip) ?? []).filter((t) => now - t < WINDOW_MS);
+  recent.push(now);
+  hits.set(ip, recent);
+  return recent.length > LIMIT;
+};
+
 Deno.serve(async (req) => {
   const origin = req.headers.get("origin");
   if (req.method === "OPTIONS") return new Response(null, { headers: cors(origin) });
   if (req.method !== "POST") return json(405, { error: "method_not_allowed" }, origin);
+  if (overLimit(clientIp(req))) return json(429, { error: "too_many_requests" }, origin);
 
   let data: Record<string, unknown>;
   try { data = await req.json(); } catch { return json(400, { error: "invalid_json" }, origin); }
+
+  // Campo "website" é oculto no formulário: se vier preenchido, é robô. Finge sucesso e não envia.
+  if (String(data.website ?? "").trim()) return json(200, { ok: true }, origin);
+
+  // hCaptcha: o token do widget é validado no servidor antes de qualquer envio.
+  const hcSecret = Deno.env.get("HCAPTCHA_SECRET_KEY");
+  if (!hcSecret) return json(500, { error: "not_configured" }, origin);
+  const token = String(data["h-captcha-response"] ?? "");
+  if (!token) return json(422, { error: "captcha_required" }, origin);
+  const hc = await fetch("https://api.hcaptcha.com/siteverify", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams({ secret: hcSecret, response: token, remoteip: clientIp(req) }),
+  });
+  const hcResult = await hc.json().catch(() => ({ success: false }));
+  if (!hcResult.success) return json(422, { error: "captcha_failed" }, origin);
 
   const f: Record<string, string> = {};
   for (const [key, max] of Object.entries(MAX)) {

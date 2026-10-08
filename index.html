@@ -18,6 +18,7 @@
 <meta property="og:url" content="https://www.elsen.com.br/">
 <meta property="og:image" content="https://www.elsen.com.br/assets/elsem-logo-512.png">
 <meta name="twitter:card" content="summary">
+<script src="https://js.hcaptcha.com/1/api.js" async defer></script>
 <script>if(matchMedia('(prefers-reduced-motion: no-preference)').matches)document.documentElement.classList.add('js')</script>
 </head>
 <body>
@@ -1224,6 +1225,7 @@ html.js .is-in .bar i,html.js .is-in .draw{animation-play-state:running}
       </div>
 
       <form class="form reveal" id="contato-form" novalidate data-component="ContactForm" aria-labelledby="form-t">
+          <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
         <div class="form-body">
           <h3 id="form-t">Quero falar com a ELSEM</h3>
           <p>Preencha os dados e um especialista retorna o contato.</p>
@@ -1236,6 +1238,8 @@ html.js .is-in .bar i,html.js .is-in .draw{animation-play-state:running}
             <div class="field"><label for="f-interesse">Interesse</label><select id="f-interesse" name="interesse" required data-render="interests"><option value="">Selecione</option></select><span class="err" aria-live="polite"></span></div>
             <div class="field full"><label for="f-msg">Mensagem <span>(opcional)</span></label><textarea id="f-msg" name="mensagem" placeholder="Conte rapidamente o desafio da sua operação"></textarea></div>
           </div>
+          <div class="h-captcha" data-sitekey="585acb12-848a-41be-ad86-b3c2174cd000" style="margin:8px 0 16px"></div>
+          <p class="err captcha-err" aria-live="polite"></p>
           <button class="btn btn-grad" type="submit">Quero falar com a ELSEM <svg class="ico"><use href="#i-arrow"/></svg></button>
           <p class="form-foot">Seus dados são usados apenas para retornar este contato.</p>
         </div>
@@ -1455,6 +1459,9 @@ const ELSEM_CONFIG = {
     let first = null;
     Object.entries(rules).forEach(([id, fn]) => { const el = $('#'+id); const r = fn(el.value); setErr(el, r === true ? '' : r); if (r !== true && !first) first = el; });
     if (first) { first.focus(); return; }
+    const captchaErr = $('.captcha-err', form);
+    if (!(new FormData(form).get('h-captcha-response'))) { captchaErr.textContent = 'Confirme que você não é um robô.'; return; }
+    captchaErr.textContent = '';
     const data = Object.fromEntries(new FormData(form));
     const okText = $('[data-ok-text]');
     if (C.contact.endpoint) {
